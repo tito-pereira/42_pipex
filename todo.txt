@@ -11,7 +11,9 @@ unlink, wait, waitpid
 • ft_printf and any equivalent
 YOU coded
 Libft authorized Yes
-Description This project is about handling pipes.
+
+Description
+This project is about handling pipes.
 Your program will be executed as follows:
 ./pipex file1 cmd1 cmd2 file2
 
@@ -38,4 +40,29 @@ pectedly (segmentation fault, bus error, double free, and so forth).
 • If you have any doubt, handle the errors like the shell command:
 < file1 cmd1 | cmd2 > file2
 
-fazer uma workable libft que inclua a getnextline e a printf numa so library
+Bonus part
+You will get extra points if you:
+• Handle multiple pipes.
+This:
+$> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+Should behave like:
+< file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
+• Support « and » when the first parameter is "here_doc".
+This:
+$> ./pipex here_doc LIMITER cmd cmd1 file
+Should behave like:
+cmd << LIMITER | cmd1 >> file
+
+-----
+
+minha libft vai ter certas funcoes auxiliares com o mesmo nome
+->mudar o nome das auxiliares dentro do printf e getnext
+
+vou ter que realizar comandos de shell e fazer pipe,
+isto e, aplicar o segundo comando ao output do primeiro
+e depois mandar o output desse para onde a redirection mandar
+e se nao existir o file de output final, cria-se
+
+para ja ainda estou a ler
+mas ainda nao percebi para que vou usar fork, pipes, dup, etc
+no minishell ainda percebo, aqui nao
