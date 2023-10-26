@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:31:19 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/10/26 14:43:15 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:00:13 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h> //open
+# include "./libft/mylib.h"
 
 
 #endif
