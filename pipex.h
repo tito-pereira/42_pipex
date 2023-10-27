@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:31:19 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/10/27 16:42:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:55:30 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <fcntl.h> //open
 # include "./libft/mylib.h"
+# include <errno.h>
 
 # define LIMITER "LIM"
 
