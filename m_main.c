@@ -18,9 +18,7 @@ void	ft_read(int fd, char *buff)
 
 	ret = 1;
 	while (ret != 0)
-	{
 		ret = read(fd, buff, INT_MAX);
-	}
 }
 
 void	two_exec(int *p2, char *buff2)

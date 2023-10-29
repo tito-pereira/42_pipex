@@ -83,14 +83,11 @@ if (pid1 != 0)
 o segundo fork dentro do primeiro
 pipe dentro do primeiro fork
 
-vou ter que realizar comandos de shell e fazer pipe,
-isto e, aplicar o segundo comando ao output do primeiro
-e depois mandar o output desse para onde a redirection mandar
-e se nao existir o file de output final, cria-se
+porque é que este projeto está a parecer super pequeno?
+Falta algo aqui tho
 
-para ja ainda estou a ler
-mas ainda nao percebi para que vou usar fork, pipes, dup, etc
-no minishell ainda percebo, aqui nao
+execve, que tipo de valores retorna?
+para começar a fazer já o código em si
 
 ->acabar videos
 ->aprender a usar a execve
