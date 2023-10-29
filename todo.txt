@@ -92,8 +92,5 @@ para ja ainda estou a ler
 mas ainda nao percebi para que vou usar fork, pipes, dup, etc
 no minishell ainda percebo, aqui nao
 
-//why is he in the house right now wtf eu disse-lhe que ia estar c a ines e ele
-//aparece assim do nada
-
 ->acabar videos
 ->aprender a usar a execve
