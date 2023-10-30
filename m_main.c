@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:34:00 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/10/27 17:37:12 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:49:14 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	two_exec(int *p2, char *buff2)
 
 	close(p2[0]);
 	buff3 = execve(buff2);
+	//execve();
 	write(p2[1], buff3);
 	free(buff2);
 	close(p2[1]);
