@@ -132,38 +132,12 @@ out = open(av[4], O_CREATE, O_EXC ou O_APPEND);
 dup(out(fd do ficheiro output));
 execve(av[3]);
 
-um file que possui nomes de outros files, directory
-comandos de shell sao executados em files sim, mas em files de directory
-se tentar fazer ls num file .c, apenas me retorna o path que escrevi
------
-exec() abre outro processo novo de terminal, corre, e se
-resultar tudo bem fecha o processo que o iniciou
------
-correr comandos(executaveis) na shell e o mesmo que
-fazer forks e passar argumentos para execs (command-line)
-o directory atual deve fazer parte das enviroments, um comando
-cd .. altera o environment DIRECTORY por exemplo, tipo flags de status
-o terminal e sempre o mesmo e corre sempre a partir do inicio, temos sempre que
-percorrer um PATH ate ao local dos ficheiros que queremos executar
-(files .c que contem os comandos de shell)
-file 1 (.c com int main() a executar, shell command)
-file 2, 3, 4, argumentos a passar a esse int main()
-(usa file descriptors para open, read, close, e realizar todos os
-comandos de shell)
-os proprios int main() precisam de aceder as env var para as alterar, entao
-passamos isso como args tambem quando necessario
-(por isso que precisamos de passar isso no execve, porque vamos correr
-shell commands q usam envp como parametro)
-shell simula o CPU:
-file 1 = morada de buscar instrucoes
-file 2 = morada de buscar data
-file 3 = morada de largar data processada
-
 nao ta a dizer nada sobre variaveis globais serem proibidas
 preciso de usar o environ da <unistd.h>
 
-->preciso de retornar o PATH talvez, ou escrever eu proprio, ou com
-um define
+->questoes do PATH:
+. "/usr/bin/which"
+. retorno do comando "which"
 
 -> depois do primeiro comando, fazer um codigo geral para
 "more commands", seja para um so pipe (mandatory) ou varios
@@ -179,3 +153,7 @@ se possivel, usar logo exit(0) nos errors
 -> estudar as redirections, tanto de input como output,
 e depois tou pronto para comecar com o pipex, e parece me ser rapido
 ate
+
+redirections para gerir o output dos execve()
+montar a estrutura de fork(), pipe(), redirections e execve()
+criar o código do início

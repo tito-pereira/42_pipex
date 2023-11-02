@@ -80,6 +80,44 @@ int main() {
     execve("/usr/bin/ls", arr, __environ);
     printf("error executing\n");
 }
+
+char    **wch;
+wch = malloc(3 * sizeof(char *));
+wch[0] = "/usr/bin/which";
+wch[1] = "cmd";
+wch[2] = NULL;
+execve("/usr/bin/which", wch, __environ);
+
+//get cmd
+while (av[2][i] != ' ') {i++;}
+cmd = malloc(i * sizeof(char));
+i = 0;
+while (av[2][i] != ' ') {
+    cmd[i] = av[2][i];
+    i++;
+}
+
+//get flags
+char    **cmd1;
+cmd1 = ft_split(av[2], ' ');
+wch[1] = cmd1[0];
+
+char    **arr;
+size = 2;
+while (cmd1[i] != NULL) {i++;}
+arr = malloc(size * sizeof(char *));
+arr[0] = "wch";
+arr[size - 1] = NULL;
+while (size > 2) {arr[i] = cmd1;}
+arr[size - 1] = NULL;
+
+//here_doc
+if (av[1] == "here_doc") {
+    while {!= LIMITER} {
+        read(0, mybuff, 1);
+    }
+}
+
 //nao funciona com built in functions?
 //certeza? vou assumir que nao
 /*
@@ -108,19 +146,24 @@ se meter av[1] como nome do file e av[1] == "ls -l" vai dar erro
 tenho q processar o nome ate aparecer so o comando principal e depois
 o comando (serao considerados como mais av[]?)
 
-acho que maior parte do codigo vai ser aqui
-como e que eu decido qual o path consoante os comandos?
-funcao de find_path()
-pega nos paths, divide-os, verifica em qual deles ta o comando, retorna o path
-como string
-como verifico sequer em qual dos paths o comando ta?
-10 paths possiveis
-ou fico a tentar execve com cada path ate nao dar erro
-
 In most Linux and Unix-like operating systems, the shell commands you commonly
 use are located in the following directories:
 
     /bin: Essential system binaries
     /usr/bin: User-level command binaries
     /usr/local/bin: Locally installed software binaries
+
+-> redirect input?
+
+file de input
+-> processar argumentos
+-> comando which
+write() para um pipe, usando o execve() em vez de escrever diretamente?
+(redirect output deve "escrever"
+so preciso de, nesse processo, fechar o fd[0] e assume que vou escrever)
+
+check de erros:
+-> execve()
+-> sss
+-> pipes, forks?
 */
