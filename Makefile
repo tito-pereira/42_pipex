@@ -15,18 +15,25 @@ CC= cc
 CFLAGS= -Wall -Wextra -Werror
 RM= rm -rf
 SRC=
+BON=
 OBJ= ${SRC:.c=.o}
+B_OBJ= ${BON:.c=.o}
 LIB= ./libft/libft.a
+LFT= -L./libft -lft
 
 $(NAME): $(OBJ)
 	make -C ./libft
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LFT) -o $(NAME)
 
 all: $(NAME)
 
+bonus:	$(B_OBJ)
+	make -C ./libft
+	$(CC) $(CFLAGS) $(B_OBJ) $(LFT) -o $(NAME)
+
 clean:
 	cd ./libft && make clean
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(B_OBJ)
 
 fclean: clean
 	cd ./libft && make fclean
