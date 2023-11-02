@@ -118,6 +118,7 @@ typedef struct s_all {
 	char	*file1;
 	t_cmd	*cmds;
 	char	*file2;
+	int		pipe_nmb; //nº argv - 3
 }	t_all;
 
 //mandatory, so 4 args (ac == 5)
@@ -164,10 +165,38 @@ mas depois como apago?
 file1 + exec1 -> pipe1
 pipe1 + exec2 -> file2
 
+(exec_one)
+dup2(p1[1], 1);
+execve(cmd1, file1)
+
+(main)
+file = p1[0] //permissao de ler
+
+while (pipe_nmb > 0) {
+(make_pipe)
+dup2(file, 0); //permissao de ler
+dup2(p2[1], 1);
+execve(cmd);
+
+(main)
+file = pipe[0];
+pipe_nmb--;
+}
+
+talvez 2 way pipes
+função exec() tem que both ler + write entao é preciso dois
+pipes simultaneos
+ou nao, as permissoes batem certo, acho que dá
 preciso de fork() para execve() os comandos
 uso pipes() para transmitir data um entre o outro
 (strings, arrays, etc)
 como faço execve disso?
 
 redireciono o output para um fifo?
+redireciono o output para o file2?
+e depois uso o file2 como input?
+mas e quando for em append_mode?
+
+ja sei..
+tenho que dup2(<output>, 0);
 */
