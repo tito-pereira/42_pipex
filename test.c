@@ -153,17 +153,10 @@ use are located in the following directories:
     /usr/bin: User-level command binaries
     /usr/local/bin: Locally installed software binaries
 
--> redirect input?
 
-file de input
--> processar argumentos
--> comando which
-write() para um pipe, usando o execve() em vez de escrever diretamente?
-(redirect output deve "escrever"
-so preciso de, nesse processo, fechar o fd[0] e assume que vou escrever)
 
 check de erros:
 -> execve()
 -> sss
--> pipes, forks?
+-> pipes, fork
 */

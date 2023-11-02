@@ -59,78 +59,6 @@ minha libft vai ter certas funcoes auxiliares com o mesmo nome
 ->mudar o nome das auxiliares dentro do printf e getnext
 
 -----
-recebo 4 args
-1 - file1 ou myinput+LIMITER
-2 - comando 1
-3 - comando 2
-4 - file2 ou output
-
-pipe(fd0, fd1)
-wait(NULL)
-    fork
-        close (fd0)
-        open (file1)
-        read all1
-        execcmd1 (all1)
-        write (fd1)
-        close (fd0)
-read (fd0) all1
-close fd1, close fd0
-if (pid1 != 0)
-    pipe (fd2, fd3)
-    wait(NULL)
-
-o segundo fork dentro do primeiro
-pipe dentro do primeiro fork
-
-porque é que este projeto está a parecer super pequeno?
-Falta algo aqui tho
-
-execve, que tipo de valores retorna?
-para começar a fazer já o código em si
-
-->acabar videos
-->aprender a usar a execve e dups
-
-pipe(fd1);
-fork();
-    if (pid1 == 0)
-    close(fd1[0]);
-    fork();
-        if (pid2 == 0)
-        dup1 -> write(pipe1);
-        execve(ac[2]);
-    else
-    wait(NULL);
-    close(fd1[1]);
-else
-wait(NULL);
-close(fd1[1]);
-pipe(fd2);
-close(fd2[0]);
-read(fd1[0], fd2[1]);
-close(fd1[0]);
-close(fd2[0]);
-fork();
-    if (pid3 == 0)
-    close(fd2[1]);
-    close(fd3[0]);
-    read(fd2[0], fd3[1]);
-    fork()
-        if (pid4 == 0)
-        dup -> fd3[1];
-        execve(av[3], arr, environ);
-    close(fd2[0]);
-    close(fd3[1]);
-
-posso ler para um char * ou tem que ser para um file?
-
-ls -l
-argumentos?
-sera q o input tambem leva redirection?
-out = open(av[4], O_CREATE, O_EXC ou O_APPEND);
-dup(out(fd do ficheiro output));
-execve(av[3]);
 
 nao ta a dizer nada sobre variaveis globais serem proibidas
 preciso de usar o environ da <unistd.h>
@@ -139,10 +67,6 @@ preciso de usar o environ da <unistd.h>
 . "/usr/bin/which"
 . retorno do comando "which"
 
--> depois do primeiro comando, fazer um codigo geral para
-"more commands", seja para um so pipe (mandatory) ou varios
-pipes (bonus)
-
 -> colocar varias mensagens de erro caso os comandos ou file names
 estejam mal escritos e dem erro
 tipo "Command "%s" does not exist or is not working\n"
@@ -150,10 +74,19 @@ ou "File "%s" does not exist ou has access problems\n"
 se possivel, usar logo exit(0) nos errors
 (garantir que tenho todos os frees dados ate esse momento)
 
--> estudar as redirections, tanto de input como output,
-e depois tou pronto para comecar com o pipex, e parece me ser rapido
-ate
 
-redirections para gerir o output dos execve()
-montar a estrutura de fork(), pipe(), redirections e execve()
-criar o código do início
+----
+. last cmd
+. make pipe loop bonus
+. proc all
+. proc bonus
+----
+
+testing
+
+----
+
+. valgrind
+. norminette
+. Makefile
+. readme e .vscode?

@@ -12,23 +12,6 @@
 
 #include "pipex.h"
 
-t_all	*proc_all(char **av)
-{
-	ez;
-	//which command av[2];
-	//which command av[3];
-	//cmds = proc_cmds(av);, cmds
-	//all = proc_all(av, cmds); files
-	/*in = open(av[1], O_RDONLY);
-	if (in == -1)
-		ft_printf("Error with input file\n");
-	posso usar o mesmo main para tudo, incluindo o
-	all = proc_all e o 
-	while (pipe_nmb)
-	e apenas mudo o valor do pipe_nmb e o processamento
-	do av[1] dentro do proc_all*/
-}
-
 void	mult_pipes(t_all *all, int in, int **p1)
 {
 	int	pid;
@@ -55,53 +38,23 @@ void	mult_pipes(t_all *all, int in, int **p1)
 
 int	main(int ac, char **av)
 {
-	int		in;
 	int		pid1;
 	int		*p1;
 	t_all	*all;
 	
-	if (ac == 5)
+	if (ac == 5) //tirar isto no bónus
 	{
 		all = malloc(sizeof(t_all));
 		all = proc_all(av);
-		p1 = malloc(2 * sizeof(int));
-		pipe(p1);
-		pid1 = fork();
-		if (pid == 0)
-			cmd_one(p1, all);
-		wait(NULL);
-		close(p1[1]);
-		in = p1[0];
-		free(p1);
+		first_cmd(all);
 		if (bonus == 1)
-			in = mult_pipes(all, in, &p1);
-		last_cmd(in, all);
+			all->input = mult_pipes(all, &p1);
+		last_cmd(all);
 		free_all(all);
 	}
 	else
 		ft_printf("Number of files and commands is wrong\n");
 }
-
-typedef struct s_cmd {
-	char	*cmd;
-	char	*wch;
-	char	*path; //path to cmd
-	char	*input; //path to input file
-	char	**flag;
-	char	**arr;
-	struct s_cmd	*next;
-}	t_cmd;
-
-char	*arr[] = {path, input, flags, NULL};
-
-typedef struct s_all {
-	char	*file1;
-	t_cmd	*cmds;
-	char	*file2;
-	int		pipe_nmb; //nº argv - 3
-	int		flag; //0 para overwite, 1 para append
-	int		bonus; //0 para mandatory, 1 para bonus
-}	t_all;
 
 //mandatory, so 4 args (ac == 5)
 //bonus, pode ser inumeros ac (here_doc, varios pipes)

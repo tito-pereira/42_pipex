@@ -20,7 +20,7 @@
 # include <sys/stat.h>
 # include <fcntl.h> //open
 # include <limits.h>
-# include "./libft/mylib.h" //usar no read
+# include "../libft/mylib.h" //usar no read
 
 # define LIMITER    "LIM"
 # define ENV_VAR    __environ
@@ -40,6 +40,7 @@ typedef struct s_all {
 	char	*file1;
 	t_cmd	*cmds;
 	char	*file2;
+	int		input;
 	int		pipe_nmb; //nº argv - 4 (if flag == 1, argv - 5)
 	int		flag; //0 para overwite, 1 para append
 	int		bonus; //0 para mandatory, 1 para bonus

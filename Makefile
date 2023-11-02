@@ -14,8 +14,8 @@ NAME= pipex
 CC= cc
 CFLAGS= -Wall -Wextra -Werror
 RM= rm -rf
-SRC=
-BON=
+SRC= ./mandatory/
+BON= ./extra/
 OBJ= ${SRC:.c=.o}
 B_OBJ= ${BON:.c=.o}
 LIB= ./libft/libft.a
