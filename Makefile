@@ -14,22 +14,26 @@ NAME= pipex
 CC= cc
 CFLAGS= -Wall -Wextra -Werror
 RM= rm -rf
-SRC= ./mandatory/
-BON= ./extra/
-OBJ= ${SRC:.c=.o}
+SRC= ./mandatory/m_free.c ./mandatory/m_in_out.c ./mandatory/m_error.c
+MAN= ./mandatory/m_main.c \
+	./mandatory/m_proc.c
+BON= ./extra/main_bonus.c \
+	./extra/proc_bonus.c
+S_OBJ= ${SRC:.c=.o}
+M_OBJ= ${MAN:.c=.o}
 B_OBJ= ${BON:.c=.o}
 LIB= ./libft/libft.a
 LFT= -L./libft -lft
 
-$(NAME): $(OBJ)
+$(NAME): $(S_OBJ) ${M_OBJ}
 	make -C ./libft
-	$(CC) $(CFLAGS) $(OBJ) $(LFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(S_OBJ) ${M_OBJ} $(LFT) -o $(NAME)
 
 all: $(NAME)
 
-bonus:	$(B_OBJ)
+bonus:	$(S_OBJ) $(B_OBJ)
 	make -C ./libft
-	$(CC) $(CFLAGS) $(B_OBJ) $(LFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(S_OBJ) $(B_OBJ) $(LFT) -o $(NAME)
 
 clean:
 	cd ./libft && make clean

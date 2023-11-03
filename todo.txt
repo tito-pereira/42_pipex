@@ -76,10 +76,12 @@ se possivel, usar logo exit(0) nos errors
 
 
 ----
-. last cmd
-. make pipe loop bonus
+. make pipe loop bonus (acho que ta)
 . proc all
 . proc bonus
+. (STDIN e STDOUT library)
+. (last cmd flags)
+. (erros, first cmd, etc)
 ----
 
 testing

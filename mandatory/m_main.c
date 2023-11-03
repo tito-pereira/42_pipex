@@ -12,30 +12,6 @@
 
 #include "pipex.h"
 
-void	mult_pipes(t_all *all, int in, int **p1)
-{
-	int	pid;
-	int	*p2;
-
-	while (all->n_pipes > 0)
-	{
-		p2 = malloc(2 * sizeof(int));
-		pid = fork();
-		if (pid == 0)
-		{
-			dup2(p1[0], STDIN_FILENO);
-			dup2(p2[1], STDOUT_FILENO);
-			close(p2[0]); //nao vou ler deste, posso fechar
-			close(p2[1]); //ja foi dupped, posso fechar
-			execve(cmd, arr, __environ);
-		}
-		all->n_pipes--;
-		free(p2);
-	}
-}
-//falta a troca de pipes, mallocs, frees, etc
-//mudar o malloc para onde p1 aponta
-
 int	main(int ac, char **av)
 {
 	int		pid1;
@@ -44,11 +20,11 @@ int	main(int ac, char **av)
 	
 	if (ac == 5) //tirar isto no bónus
 	{
-		all = malloc(sizeof(t_all));
+		//all = malloc(sizeof(t_all));
 		all = proc_all(av);
 		first_cmd(all);
 		if (bonus == 1)
-			all->input = mult_pipes(all, &p1);
+			mult_pipes(all, &p1);
 		last_cmd(all);
 		free_all(all);
 	}

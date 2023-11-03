@@ -42,9 +42,9 @@ void	last_cmd(t_all *all)
 	int	pid;
 	int	out;
 
-	if (all->bonus == 0)
+	if (all->flag == 0)
 		out = open(all->file2, O_WRONLY | O_CREAT | O_TRUNC);
-	else if (all->bonus == 1)
+	else if (all->flag == 1)
 		out = open(all->file2, O_WRONLY | O_CREAT | O_APPEND);
 	if (out == -1)
 		ft_printf("Error with output file\n");
