@@ -42,8 +42,8 @@ typedef struct s_all {
 	char	*file2;
 	int		input;
 	int		pipe_nmb; //nº argv - 4 (if flag == 1, argv - 5)
-	int		flag; //0 para overwite, 1 para append
-	int		bonus; //0 para mandatory, 1 para bonus
+	int		append; //0 para overwite, 1 para append
+	int		multi; //0 para mandatory, 1 para bonus
 }	t_all;
 
 //atencao ao mylib/libft porque ha funcoes auxiliares c o mesmo nome

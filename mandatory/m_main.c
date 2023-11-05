@@ -20,10 +20,10 @@ int	main(int ac, char **av)
 	
 	if (ac == 5) //tirar isto no bónus
 	{
-		//all = malloc(sizeof(t_all));
 		all = proc_all(av);
-		first_cmd(all);
-		if (bonus == 1)
+		in = open(all->file1, O_RDONLY);
+		first_cmd(all, in);
+		if (all->appen == 1 | all->multi == 1)
 			mult_pipes(all, &p1);
 		last_cmd(all);
 		free_all(all);

@@ -6,7 +6,7 @@
 -> retornar fd[0] para ser lido e usado pelo main process depois
 */
 
-void	first_cmd(int *p1, t_all *all)
+void	first_cmd(int *p1, t_all *all, int in)
 {
 	int	*p1;
 	int	pid;
@@ -19,6 +19,7 @@ void	first_cmd(int *p1, t_all *all)
 		man_error(2, p1, all);
 	if (pid == 0)
 	{
+		dup2(in, STDIN_FILENO); //file de input, acho que fecha automatico
 		dup2(p1[1], STDOUT_FILENO); //output é o pipe de escrita
 		close(p1[0]); //fecha a leitura, aqui vai ser só escrever para o pipe
 		close(p1[1]); //ja dupliquei entao fecho
@@ -30,6 +31,7 @@ void	first_cmd(int *p1, t_all *all)
 	all->input = p1[0];
 	free(p1);
 }
+//introduzir o file1 como input no dup2
 
 /*
 -> dependendo de bonus ou nao, faz open() c flags diferentes
