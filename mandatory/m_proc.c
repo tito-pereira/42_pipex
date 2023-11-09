@@ -1,13 +1,48 @@
 #include "pipex.h"
 
-mudar arr[0] para which(arr[0]);
-	->char **tmp {"/usr/bin/which", av[0], NULL};
-	->pipe, fork
-	->dup2(pipe[1], STDOUT_FILENO);
-	->execve("/usr/bin/which", tmp, __environ);
-	->wait(NULL);
-	->free(tmp);
-	->read char* from pipe
+// --- suportes ---
+
+char	*r_malloc(char *str)
+{
+	char	*new;
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	new = malloc((i + 1) * (sizeof(char)));
+	i = 0;
+	while (str[i] != '\0')
+	{
+		new[i] = str[i];
+		i++;
+	}
+	i++;
+	new[i] = '\0';
+	free(str);
+	return(new);
+}
+
+char	**new_arr(char **arr)
+{
+	char	**new;
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+		i++;
+	new = malloc((i + 1) * sizeof(char *));
+	while (arr[i] != NULL)
+	{
+		new[i] = arr[i];
+		i++;
+	}
+	new[i] = NULL;
+	free(arr);
+	return(new);
+}
+
+// --- fork which command e derivados ---
 
 char	*read_pipe(int fd)
 {
@@ -66,6 +101,8 @@ char	*proc_which(char *arr)
 	return(total);
 }
 
+// --- criar estrutura all e derivados ---
+
 t_cmd	*proc_cmds(char **av)
 {
 	t_cmd	*new;
@@ -98,6 +135,9 @@ t_all	*proc_all(char **av)
 	return(all);
 }
 
+// --- rascunhos ---
+
+/*
 all->cmds = malloc(sizeof(t_cmd));
 all->cmds->arr = ft_split(av[1], ' ');
 
@@ -134,46 +174,7 @@ realloc 1 a 1;
 if (ret == 1), continue;
 if (ret == 0), buff = realloc(+1), buff[last] = '\0', break;
 será que preciso do \0 ou já vem?
-
-char	*r_malloc(char *str)
-{
-	char	*new;
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	new = malloc((i + 1) * (sizeof(char)));
-	i = 0;
-	while (str[i] != '\0')
-	{
-		new[i] = str[i];
-		i++;
-	}
-	i++;
-	new[i] = '\0';
-	free(str);
-	return(new);
-}
-
-char	**new_arr(char **arr)
-{
-	char	**new;
-	int	i;
-
-	i = 0;
-	while (arr[i] != NULL)
-		i++;
-	new = malloc((i + 1) * sizeof(char *));
-	while (arr[i] != NULL)
-	{
-		new[i] = arr[i];
-		i++;
-	}
-	new[i] = NULL;
-	free(arr);
-	return(new);
-}
+*/
 
 /*
 typedef struct s_cmd {

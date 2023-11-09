@@ -76,9 +76,12 @@ se possivel, usar logo exit(0) nos errors
 
 
 ----
-. make pipe loop bonus (acho que ta)
-. proc all
 . proc bonus
+. erros e frees
+resolver conflitos do libft
+
+. make pipe loop bonus (acho que ta)
+. proc all (parece estar)
 . (STDIN e STDOUT library)
 . (last cmd flags)
 . (erros, first cmd, etc)
