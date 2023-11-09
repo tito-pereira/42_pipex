@@ -27,11 +27,10 @@
 # define PATH       __environ[32]
 
 typedef struct s_cmd {
-	char	*cmd;
-	char	*wch;
-	char	*path; //path to cmd
-	char	*input; //path to input file
-	char	**flag;
+	//char	*cmd; //so e usado para o which
+	//char	*wch; //passo intermedio de formar o path
+	//char	*path; //posso usar apenas arr[0]
+	//char	**flag;
 	char	**arr;
 	struct s_cmd	*next;
 }	t_cmd;

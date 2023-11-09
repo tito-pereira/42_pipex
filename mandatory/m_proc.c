@@ -12,16 +12,32 @@ mudar arr[0] para which(arr[0]);
 char	*read_pipe(int fd)
 {
 	char	*total;
+	int	err;
+	int	i;
 
-	total;
-	return(total)
+	err = 1;
+	i = 0;
+	total = malloc(2 * sizeof(char));
+	total[1] = '\0';
+	while (i++ && err != 0)
+	{
+		err = read(fd, total, 1);
+		if (err == 1)
+			total = r_malloc(total);
+		else if (err == 0)
+		{
+			total = sub_malloc(total);
+			break ;
+		}
+	}
+	return(total);
 }
 
 void	exec_which(int *fd, char **tmp)
 {
-	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
+	close(fd[0]); //fecha fd[0]
+	dup2(fd[1], STDOUT_FILENO); //fecha fd[1] dup
+	close(fd[1]); // fecha fd[1]
 	execve("/usr/bin/which", tmp, __environ);
 }
 
@@ -44,7 +60,8 @@ char	*proc_which(char *arr)
 	wait(NULL);
 	free(tmp);
 	close(fd[1]);
-	total = read_pipe(fd[0]); //
+	total = read_pipe(fd[0]);
+	close(fd[0]); //ou aqui ou no read_pipe p poupar linhas
 	free(fd);
 	return(total);
 }
@@ -54,30 +71,23 @@ t_cmd	*proc_cmds(char **av)
 	t_cmd	*new;
 
 	new = malloc(sizeof(t_cmd));
-	new->arr = ft_split(av[1], ' ');
+	new->arr = ft_split(av[2], ' ');
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	new->arr[0] = proc_which(new->arr[0]);
+	new = new->next;
+	new = malloc(sizeof(t_cmd));
+	new->arr = ft_split(av[3], ' ');
+	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
+	new->arr[0] = proc_which(new->arr[0]);
+	new->next = NULL;
 	return(new);
 }
-/*
-sabemos que é bonus quando o numero de args é maior q 4
-ou por ter here_doc (ahh caga assim é com 4)
-
-all->multi (pipe_nmb)
-all->append (O_TRUNC), former flag
-*/
 
 t_all	*proc_all(char **av)
 {
 	t_all	*all;
 
 	all = malloc(sizeof(t_all));
-	if (av[1] == "here_doc")
-	{
-		all->flag = 1;
-		all->bonus = 1;
-		read(0); //provavelmente função à parte
-	}
 	all->file1 = av[1];
 	all->file2 = av[4];
 	all->pipe_nmb = 0; //mandatory, é logo 0
@@ -86,10 +96,6 @@ t_all	*proc_all(char **av)
 	all->input = -1; //usado mais à frente
 	all->cmds = proc_cmds(av);
 	return(all);
-	//which command av[2];
-	//which command av[3];
-	//cmds = proc_cmds(av);, cmds
-	//all = proc_all(av, cmds); files
 }
 
 all->cmds = malloc(sizeof(t_cmd));

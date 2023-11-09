@@ -18,7 +18,7 @@ SRC= ./mandatory/m_free.c ./mandatory/m_in_out.c ./mandatory/m_error.c
 MAN= ./mandatory/m_main.c \
 	./mandatory/m_proc.c
 BON= ./extra/main_bonus.c \
-	./extra/proc_bonus.c
+	./extra/proc_bonus.c ./extra/multi_bonus.c
 S_OBJ= ${SRC:.c=.o}
 M_OBJ= ${MAN:.c=.o}
 B_OBJ= ${BON:.c=.o}
