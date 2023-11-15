@@ -31,7 +31,7 @@ typedef struct s_params	t_pain;
 int		ft_printf(const char *s, ...);
 int		normie(va_list args, int *c, t_pain bois);
 int		see_if_spec(char c);
-int		ft_strlen(char *str);
+int		ff_strlen(char *str); //aqui, ft_strlen
 int		ft_strlen_p(char *str, int psize);
 void	ft_putstr(char *str);
 int		ft_putstr_c(char *str);
@@ -43,7 +43,7 @@ void	ft_putnbr_pos(int n, int *c);
 void	ft_put_uns_nbr(unsigned int n, int *c);
 char	check_letter_p(long unsigned int i);
 void	ft_putphex_c(long unsigned int n, int *c);
-char	*ft_itoa(int n);
+char	*f_itoa(int n); //aqui, ft_itoa
 char	*ft_long_itoa(unsigned int n);
 char	*ft_hbx_itoa(unsigned int n);
 char	*ft_hx_itoa(unsigned int n);

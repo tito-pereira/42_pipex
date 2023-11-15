@@ -23,10 +23,10 @@
 # endif
 
 char	*get_next_line(int fd);
-int		ft_strlen(char *str);
+int		f_strlen(char *str);
 int		ft_find_n(char *str);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*ft_strdup(char *src);
+char	*f_substr(char *s, unsigned int start, size_t len);
+char	*f_strdup(char *src);
 char	*ft_new_chest(char *chest);
 
 #endif

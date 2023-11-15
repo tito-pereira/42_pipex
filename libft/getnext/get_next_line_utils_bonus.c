@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-int	ft_strlen(char *str)
+int	f_strlen(char *str)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ dupla funcao, verificar se existe uma quebra
 e caso exista, retornar a sua posicao
 */
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*f_substr(char *s, unsigned int start, size_t len)
 {
 	char		*substr;
 	size_t		i;
@@ -70,7 +70,7 @@ um simples substr, a ser usado para criar loots a partir
 do chest que ja contenha quebras de linha
 */
 
-char	*ft_strdup(char *src)
+char	*f_strdup(char *src)
 {
 	char	*dest;
 	int		i;

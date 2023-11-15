@@ -24,8 +24,8 @@ char	*ft_safe(char *shovel, char *chest)
 		chest = (char *)malloc(1 * sizeof(char));
 		chest[0] = '\0';
 	}
-	j = ft_strlen(chest);
-	safe = (char *)malloc((ft_strlen(shovel) + j + 1) * sizeof(char));
+	j = f_strlen(chest);
+	safe = (char *)malloc((f_strlen(shovel) + j + 1) * sizeof(char));
 	if (safe == NULL)
 		return (NULL);
 	i = -1;
@@ -92,7 +92,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (chest[fd] && ft_find_n(chest[fd]) > 0)
 	{
-		loot = ft_substr(chest[fd], 0, ft_find_n(chest[fd]));
+		loot = f_substr(chest[fd], 0, ft_find_n(chest[fd]));
 		chest[fd] = ft_new_chest(chest[fd]);
 		return (loot);
 	}
@@ -101,11 +101,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (chest[fd] && ft_find_n(chest[fd]) > 0)
 	{
-		loot = ft_substr(chest[fd], 0, ft_find_n(chest[fd]));
+		loot = f_substr(chest[fd], 0, ft_find_n(chest[fd]));
 		chest[fd] = ft_new_chest(chest[fd]);
 		return (loot);
 	}
-	loot = ft_strdup(chest[fd]);
+	loot = f_strdup(chest[fd]);
 	chest[fd] = ft_free_chest(chest[fd]);
 	return (loot);
 }

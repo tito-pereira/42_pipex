@@ -79,6 +79,8 @@ se possivel, usar logo exit(0) nos errors
 . proc bonus
 . erros e frees
 resolver conflitos do libft
+-> ja mudei o nome das funcoes do get_next
+-> falta mudar itoa e strlen do printf
 
 . make pipe loop bonus (acho que ta)
 . proc all (parece estar)

@@ -26,10 +26,20 @@ char	*read_term()
 	}
 	return(new);
 }
+
+/*
+função usada para ler do terminal 
+new
+
+acrescentar as condições de fim de leitura quando a funcao read()
+retorna 0
+*/
+
 /*
 faco if sucessivos em vez de um só if ou while porque, no inicio,
 so vou ter malloc de 1 e nao consigo aceder a 3 posicoes de pointer se só
 existe uma, vai dar erro de compilação
+size of 1, se eu tentar aceder a 3 posições vai dar logo erro
 */
 
 t_all	*proc_all(char **av)
@@ -60,12 +70,13 @@ t_all	*proc_all(char **av)
 		all->file2 = av[c];
 	}
 	all->input = -1; //usado mais à frente
-	all->cmds = proc_cmds(av);
+	all->cmds = proc_cmds_bonus(av);
 	return(all);
 }
 
 /*
 o proc cmds bonus vai precisar de um while loop qq
+nao posso usar o proc commands normal, vou precisar do proc cmds bonus
 */
 
 t_all	*proc_central(char **av)

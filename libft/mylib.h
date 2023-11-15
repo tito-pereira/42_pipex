@@ -7,5 +7,6 @@
 
 //int		ft_printf(const char *s, ...);
 //char	    *get_next_line(int fd);
+//funções auxiliares do libft
 
 #endif
