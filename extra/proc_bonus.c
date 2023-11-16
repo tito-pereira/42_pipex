@@ -3,27 +3,59 @@
 char	*read_term()
 {
 	char	*new;
-	int	i;
-	int	err;
+	char	*tmp;
+	int		i;
+	int		err;
 
-	new = malloc(sizeof(char));
-	err = 1;
 	i = 0;
+	err = 1;
+	new = malloc(sizeof(char));
 	new = '\0';
+	tmp = malloc(2 * sizeof(char));
+	tmp[1] = '\0';
 	while(i++ && err != 0)
 	{
-		err = read(0, new, 1);
+		err = read(0, tmp, 1);
+		if (err == 0)
+		{
+			free(tmp);
+			return(new);
+		}
+		//sera q adiciono err = -1 e um erro?
+		tmp[err] = '\0';
+		new = fill_chest(tmp, new);
 		if(new[i] == 'M')
 		{
 			if(new[i - 1] == 'I')
 			{
 				if(new[i - 2] == 'L')
+				{
+					free(tmp);
 					break ;
+				}
 			}
 		}
-		if (err == 1)
-			new = r_malloc(new);
 	}
+	return(new);
+}
+
+char	*fill_chest(char *tmp, char *old)
+{
+	char	*new;
+	int	len;
+	int	i;
+
+	i = 0;
+	len = ft_strlen(old);
+	new = malloc((len + 2) * sizeof(char));
+	while (old[i] != '\0')
+	{
+		new[i] = old[i];
+		i++;
+	}
+	new[len] = tmp[0];
+	new[len + 1] = '\0';
+	free(old); //acho que é preciso não? testar depois
 	return(new);
 }
 
@@ -31,8 +63,12 @@ char	*read_term()
 função usada para ler do terminal 
 new
 
+eu nao posso ler varias vezes para o mesmo sitio
+aquilo nao acumula o buffer, apenas o substitui
+
 acrescentar as condições de fim de leitura quando a funcao read()
 retorna 0
+fazer a função de_malloc, que retira o espaço em branco
 */
 
 /*
@@ -45,7 +81,9 @@ size of 1, se eu tentar aceder a 3 posições vai dar logo erro
 t_all	*proc_all(char **av)
 {
 	t_all	*all;
+	int	c;
 
+	c = 0;
 	all = malloc(sizeof(t_all));
 	if (av[1] == "here_doc")
 	{
@@ -93,4 +131,5 @@ t_all	*proc_central(char **av)
 
 /*
 na main bonus, em vez de mandar para uma proc, mando para esta central
+usar só no bonus
 */
