@@ -24,7 +24,7 @@ int	ft_u_spec(va_list arg, t_pain bois)
 		ito = NULL;
 	else
 		ito = ft_long_itoa(tmp);
-	bois.psize -= ft_strlen(ito);
+	bois.psize -= ff_strlen(ito);
 	while (bois.psize > 0)
 	{
 		ft_putchar('0');
@@ -51,7 +51,7 @@ int	ft_x_spec(va_list arg, char f, t_pain bois)
 		ito = ft_hx_itoa(tmp);
 	if ((f == '#') && (tmp > 0))
 		c = c + ft_putstr_c("0x");
-	bois.psize -= ft_strlen(ito);
+	bois.psize -= ff_strlen(ito);
 	while (bois.psize > 0)
 	{
 		ft_putchar('0');
@@ -78,7 +78,7 @@ int	ft_bx_spec(va_list arg, char f, t_pain bois)
 		ito = ft_hbx_itoa(tmp);
 	if ((f == '#') && (tmp > 0))
 		c = c + ft_putstr_c("0X");
-	bois.psize -= ft_strlen(ito);
+	bois.psize -= ff_strlen(ito);
 	while (bois.psize > 0)
 	{
 		ft_putchar('0');

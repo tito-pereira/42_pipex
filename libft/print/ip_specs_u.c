@@ -51,7 +51,7 @@ int	ip_p_spec_null(void *tmp, t_pain bois)
 	p_control_flag(bois.str, bois.i);
 	n = "(nil)";
 	tmp = n;
-	bois.size = bois.size - ft_strlen(((char *)tmp));
+	bois.size = bois.size - ff_strlen(((char *)tmp));
 	if (f2 == '-')
 		c = c + p_p_null_space_m(((char *)tmp), bois.size, ' ');
 	else if (f2 == 'f' || f2 == '0')
@@ -67,7 +67,7 @@ char	*p_null_support(long unsigned int tmp, t_pain *bois, char *ito)
 		bois->size++;
 	}
 	if (bois->pex == 1)
-		bois->psize -= ft_strlen(ito);
+		bois->psize -= ff_strlen(ito);
 	if (bois->psize >= 0)
 		bois->size -= bois->psize;
 	return (ito);

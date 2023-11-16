@@ -76,7 +76,7 @@ char	*f_strdup(char *src)
 	int		i;
 
 	i = 0;
-	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	dest = malloc(sizeof(char) * f_strlen(src) + 1);
 	if (!dest)
 		return (NULL);
 	while (src[i] != '\0')
@@ -113,7 +113,7 @@ char	*ft_new_chest(char *chest)
 		i++;
 		j++;
 	}
-	new = ft_substr(chest, n, j);
+	new = f_substr(chest, n, j);
 	free (chest);
 	return (new);
 }

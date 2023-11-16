@@ -55,11 +55,6 @@ cmd << LIMITER | cmd1 >> file
 
 -----
 
-minha libft vai ter certas funcoes auxiliares com o mesmo nome
-->mudar o nome das auxiliares dentro do printf e getnext
-
------
-
 nao ta a dizer nada sobre variaveis globais serem proibidas
 preciso de usar o environ da <unistd.h>
 
@@ -98,3 +93,9 @@ começar a montagem final e os testes
 . norminette
 . Makefile
 . readme e .vscode?
+
+----
+Libft:
+-> testar as funções com os novos nomes das auxiliares e verificar q funcionam
+bem e sem leaks de memória para não me lixarem futuros projetos
+-> usar o file stuff para testar isso talvez

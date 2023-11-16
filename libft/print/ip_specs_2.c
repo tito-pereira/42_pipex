@@ -24,7 +24,7 @@ int	ip_u_spec(va_list arg, t_pain bois)
 	f2 = ft_check_z_m(bois.str, bois.i);
 	p_control_flag(bois.str, bois.i);
 	ito = ft_long_itoa(tmp);
-	bois.size = bois.size - ft_strlen(ito);
+	bois.size = bois.size - ff_strlen(ito);
 	if (f2 == '-')
 		c = c + p_u_spec_left(tmp, bois, ' ');
 	else if (f2 == '0' || f2 == 'f')
@@ -46,7 +46,7 @@ int	ip_x_spec(va_list arg, t_pain bois)
 	f2 = ft_check_z_m(bois.str, bois.i);
 	f1 = p_control_flag(bois.str, bois.i);
 	ito = ft_hx_itoa(tmp);
-	bois.size = bois.size - ft_strlen(ito);
+	bois.size = bois.size - ff_strlen(ito);
 	if (f2 == '-')
 		c = c + p_x_spec_space_m(tmp, bois, ' ', f1);
 	else if (f2 == 'f')
@@ -70,7 +70,7 @@ int	ip_bx_spec(va_list arg, t_pain bois)
 	f2 = ft_check_z_m(bois.str, bois.i);
 	f1 = p_control_flag(bois.str, bois.i);
 	ito = ft_hbx_itoa(tmp);
-	bois.size = bois.size - ft_strlen(ito);
+	bois.size = bois.size - ff_strlen(ito);
 	if (f2 == '-')
 		c = c + p_bx_spec_space_m(tmp, bois, ' ', f1);
 	else if (f2 == 'f')

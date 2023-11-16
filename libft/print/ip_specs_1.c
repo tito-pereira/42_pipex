@@ -48,7 +48,7 @@ int	ip_s_spec(va_list arg, t_pain bois)
 	if (bois.pex == 1)
 		bois.size = bois.size - ft_strlen_p(tmp, bois.psize);
 	else if (bois.pex == 0)
-		bois.size = bois.size - ft_strlen(tmp);
+		bois.size = bois.size - ff_strlen(tmp);
 	if (f2 == '-')
 		c = c + p_s_spec_l(tmp, bois, ' ');
 	else
@@ -71,7 +71,7 @@ int	ip_p_spec(va_list arg, t_pain bois)
 	f2 = ft_check_z_m(bois.str, bois.i);
 	f1 = p_control_flag(bois.str, bois.i);
 	ito = ft_lhx_itoa(((long unsigned int)tmp));
-	bois.size = bois.size - ft_strlen(ito);
+	bois.size = bois.size - ff_strlen(ito);
 	if (f2 == '-')
 		c = c + p_p_spec_space_m(((long unsigned int)tmp), bois.size, ' ', f1);
 	else if (f2 == 'f')
@@ -94,8 +94,8 @@ int	ip_d_spec(va_list arg, t_pain bois)
 	tmp = va_arg(arg, int);
 	f2 = ft_check_z_m(bois.str, bois.i);
 	f1 = p_control_flag(bois.str, bois.i);
-	ito = ft_itoa(tmp);
-	bois.size = bois.size - ft_strlen(ito);
+	ito = f_itoa(tmp);
+	bois.size = bois.size - ff_strlen(ito);
 	if (f2 == '-')
 		c = c + p_d_spec_space_m(tmp, bois, ' ', f1);
 	else if (f2 == 'f')

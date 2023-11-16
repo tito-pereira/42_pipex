@@ -96,14 +96,14 @@ int	ft_d_spec(va_list arg, char f, t_pain bois)
 	if (tmp == 0 && bois.pex == 1)
 		ito = NULL;
 	else
-		ito = ft_itoa(tmp);
+		ito = f_itoa(tmp);
 	if ((f == '+') && (tmp >= 0))
 		c = c + ft_putchar_c('+');
 	else if ((f == ' ') && (tmp >= 0) && (bois.pex == 0))
 		c = c + ft_putchar_c(' ');
 	else if (tmp < 0)
 		c = c + ft_putchar_c('-');
-	bois.psize -= ft_strlen(ito);
+	bois.psize -= ff_strlen(ito);
 	while (bois.psize-- > 0)
 		c = c + ft_putchar_c('0');
 	c = c + ft_putstr_c(ito);
