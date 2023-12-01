@@ -71,7 +71,7 @@ int	p_d_spec_space_m(int tmp, t_pain bois, char pad, char f1)
 	char	*ito;
 
 	c = 0;
-	ito = ft_itoa(tmp);
+	ito = f_itoa(tmp);
 	ito = p_null_support(tmp, &bois, ito);
 	if (f1 == '+' && tmp >= 0)
 	{
@@ -98,7 +98,7 @@ int	p_d_spec_space_f(int tmp, t_pain bois, char pad, char f1)
 	char	*ito;
 
 	c = 0;
-	ito = ft_itoa(tmp);
+	ito = f_itoa(tmp);
 	ito = p_null_support(tmp, &bois, ito);
 	if (tmp < 0 || f1 == '+')
 		bois.size--;

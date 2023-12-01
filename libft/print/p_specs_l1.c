@@ -91,7 +91,7 @@ int	p_d_spec_zero(int tmp, t_pain bois, char pad, char f1)
 	char	*ito;
 
 	c = 0;
-	ito = ft_itoa(tmp);
+	ito = f_itoa(tmp);
 	ito = p_null_support(tmp, &bois, ito);
 	d_support(&bois, f1, tmp, &c);
 	if (bois.pex == 1)
