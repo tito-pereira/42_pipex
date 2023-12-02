@@ -37,7 +37,7 @@ bonus:	$(S_OBJ) $(B_OBJ)
 
 clean:
 	cd ./libft && make clean
-	$(RM) $(OBJ) $(B_OBJ)
+	$(RM) $(S_OBJ) $(M_OBJ) $(B_OBJ)
 
 fclean: clean
 	cd ./libft && make fclean
