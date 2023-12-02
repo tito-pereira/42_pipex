@@ -14,8 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	int		pid1;
-	int		*p1;
+	//int		pid1;
+	int		in;
+	//int		*p1;
 	t_all	*all;
 	
 	if (ac == 5) //tirar isto no bónus
@@ -23,14 +24,16 @@ int	main(int ac, char **av)
 		all = proc_all(av);
 		in = open(all->file1, O_RDONLY);
 		first_cmd(all, in);
-		if (all->appen == 1 | all->multi == 1)
-			mult_pipes(all, &p1);
+		//if (all->append == 1 || all->multi == 1)
+			//mult_pipes(all, &p1);
 		last_cmd(all);
 		free_all(all);
 	}
 	else
 		ft_printf("Number of files and commands is wrong\n");
 }
+
+// NAO ESQUECER DE DAR CLOSE() DO FD IN
 
 //mandatory, so 4 args (ac == 5)
 //bonus, pode ser inumeros ac (here_doc, varios pipes)

@@ -68,6 +68,9 @@ char	*read_pipe(int fd)
 	return(total);
 }
 
+// O QUE É A FUNÇÃO SUB MALLOC??
+// ACHO QUE JA NEM SEQUER A USO MAS JA N ME LEMBRO
+
 void	exec_which(int *fd, char **tmp)
 {
 	close(fd[0]); //fecha fd[0]
@@ -80,8 +83,8 @@ char	*proc_which(char *arr)
 {
 	char	*total;
 	char	**tmp;
-	int	**fd;
-	int	pid;
+	int		*fd;
+	int		pid;
 
 	fd = malloc(2 * sizeof(int));
 	pid = pipe(fd);

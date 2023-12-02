@@ -71,31 +71,31 @@ se possivel, usar logo exit(0) nos errors
 
 
 ----
-. erros e frees
-resolver conflitos do libft
--> falta mudar itoa e strlen do printf
-
+. libft parece compilar direito
 . make pipe loop bonus (acho que ta)
 . proc all (parece estar)
 . (STDIN e STDOUT library)
 . (last cmd flags)
 . (erros, first cmd, etc)
-----
-
-testing
-
-acho que ta tudo exceto free e erros
-começar a montagem final e os testes
-
-----
 
 . valgrind
 . norminette
 . Makefile
 . readme e .vscode?
 
+- ver aquela questão do path dentro da struct all
+----
+
+testing
+
+acho que ta tudo exceto free e erros
+começar a montagem final e os testes
+como testar? suponho que tenho que criar files para usar como input
+ver qual o output que eles mandam
+
 ----
 Libft:
 -> testar as funções com os novos nomes das auxiliares e verificar q funcionam
 bem e sem leaks de memória para não me lixarem futuros projetos
 -> usar o file stuff para testar isso talvez
+-> criar uma newlib reorganizada, em que o getnext e o print usam as funções da libft

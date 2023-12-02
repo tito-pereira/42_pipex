@@ -1,5 +1,6 @@
 #include "pipex.h"
 
+/*
 void	free_dp(char **str)
 {
 	ez;
@@ -37,6 +38,7 @@ void	free_all(t_all *all)
 	free_cmds(all->cmds);
 	free(all);
 }
+*/
 
 /*
 typedef struct s_cmd {

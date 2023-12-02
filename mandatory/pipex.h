@@ -51,8 +51,9 @@ typedef struct s_all {
 // free
 void	free_all(t_all *all);
 // proc_all
+t_all	*proc_all(char **av);
 // first, last
-void	first_cmd(int *p1, t_all *all);
-void	last_cmd(t_all *all, int in);
+void	first_cmd(t_all *all, int in);
+void	last_cmd(t_all *all);
 
 #endif
