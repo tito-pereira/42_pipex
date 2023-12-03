@@ -111,12 +111,12 @@ t_cmd	*proc_cmds(char **av)
 	t_cmd	*new;
 
 	new = malloc(sizeof(t_cmd));
-	new->arr = ft_split(av[2], ' ');
+	new->arr = ft_split(av[2], ' '); //
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
-	new->arr[0] = proc_which(new->arr[0]);
+	new->arr[0] = proc_which(new->arr[0]); //
 	new = new->next;
 	new = malloc(sizeof(t_cmd));
-	new->arr = ft_split(av[3], ' ');
+	new->arr = ft_split(av[3], ' '); //
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	new->arr[0] = proc_which(new->arr[0]);
 	new->next = NULL;
@@ -125,6 +125,13 @@ t_cmd	*proc_cmds(char **av)
 /*
 so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
 ja sei de antemao que só recebo 4 args
+eu tou a acrescentar NULL no fim, boa
+mas tou so a alterar o arr[0] para o seu path
+e nao estou a repeti-lo
+devia ser:
+arr[0] = command path (which command)
+arr[1] = igual (repeat)
+acho que vou ter que duplicar primeiro o arr[0] e so depois modificar
 */
 
 t_all	*proc_all(char **av)
