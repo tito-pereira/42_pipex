@@ -92,6 +92,7 @@ acho que ta tudo exceto free e erros
 começar a montagem final e os testes
 como testar? suponho que tenho que criar files para usar como input
 ver qual o output que eles mandam
+testar por etapas se estiver a ter muitas dificuldades
 
 ----
 Libft:

@@ -122,6 +122,10 @@ t_cmd	*proc_cmds(char **av)
 	new->next = NULL;
 	return(new);
 }
+/*
+so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
+ja sei de antemao que só recebo 4 args
+*/
 
 t_all	*proc_all(char **av)
 {
