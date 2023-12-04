@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 		//if (all->append == 1 || all->multi == 1)
 			//mult_pipes(all, &p1);
 		last_cmd(all);
-		free_all(all);
+		//free_all(all);
 	}
 	else
 		ft_printf("Number of files and commands is wrong\n");

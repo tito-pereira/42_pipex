@@ -42,6 +42,24 @@ char	**new_arr(char **arr)
 	return(new);
 }
 
+char	*sub_malloc(char *total)
+{
+	char	*new;
+	int		len;
+	int		i;
+
+	len = ft_strlen(total);
+	new = malloc(len * sizeof(char));
+	i = 0;
+	while (i <= len)
+	{
+		new[i] = total[i];
+		i--;
+	}
+	new[len] = '\0';
+	return (new);
+}
+
 // --- fork which command e derivados ---
 
 char	*read_pipe(int fd)
@@ -68,8 +86,11 @@ char	*read_pipe(int fd)
 	return(total);
 }
 
-// O QUE É A FUNÇÃO SUB MALLOC??
-// ACHO QUE JA NEM SEQUER A USO MAS JA N ME LEMBRO
+/*
+mandei o output do execve c o "which" command para um pipe, aka,
+file temporário, e agora para o poder usar como char * no meu codigo, tenho
+que ler desse file, daí esta função
+*/
 
 void	exec_which(int *fd, char **tmp)
 {
@@ -111,14 +132,14 @@ t_cmd	*proc_cmds(char **av)
 	t_cmd	*new;
 
 	new = malloc(sizeof(t_cmd));
-	new->arr = ft_split(av[2], ' '); //
+	new->arr = ft_split(av[2], ' '); //primeiro set de comandos na char **
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
-	new->arr[0] = proc_which(new->arr[0]); //
-	new = new->next;
-	new = malloc(sizeof(t_cmd));
-	new->arr = ft_split(av[3], ' '); //
+	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
+	new = new->next; //char ** = char ** next
+	new = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
+	new->arr = ft_split(av[3], ' '); //segundo set de comandos na char **
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
-	new->arr[0] = proc_which(new->arr[0]);
+	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
 	new->next = NULL;
 	return(new);
 }

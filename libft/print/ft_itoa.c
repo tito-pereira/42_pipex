@@ -70,7 +70,7 @@ char	*ft_support(char *ret, unsigned int tmp, int i, int n)
 	return (ret);
 }
 
-char	*ft_itoa(int n)
+char	*f_itoa(int n)
 {
 	int				i;
 	unsigned int	tmp;

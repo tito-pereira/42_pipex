@@ -102,6 +102,22 @@ bem e sem leaks de memória para não me lixarem futuros projetos
 -> usar o file stuff para testar isso talvez
 -> criar uma newlib reorganizada, em que o getnext e o print usam as funções da libft
 
+acho que, se incluires uma função errada no ficheiro .h, não faz grande diferença,
+apenas fica lá a existir mas nunca é chamada
+o mesmo acontece c funções auxiliares c o mesmo nome das funções do libft,
+desde que não incluas #include "libft", é uma função apenas exclusiva desse
+file e não tem importancia
+só não percebi é como compilou tendo em conta que eu uso várias vezes a ff_strlen
+modificada mas não a tenho escrita em lado nenhum, apenas declaro sem a ter criado
+ora bem:
+- compilo uma biblioteca;
+- a biblioteca compila as funções que eu incluo dos files .h;
+- não existindo conflitos nos headers, a biblioteca compila na mesma;
+- pode até existir conflito algures nos files, mas a biblioteca só usa o
+que está no header então não deteta nem cria problemas
+a diferença se calhar está entre compilar uma biblioteca e um programa? idk
+biblio: .c=.o, compile .a
+exec: .c=.o, compile exec
 ----
 mandatory:
 4 args, file in/out, commands 1/2
@@ -114,8 +130,13 @@ mandatory:
 - guardar tudo na struct all;
 
 2. first command
-- pipe que comunica com a main function
+- pipe[0] que comunica com a main function;
+- fork, execve do primeiro comando,
+    dup() para redirecionar output para pipe, pipe[1] do output;
 
 3. (bonus) multiple commands
+- repetir o procedimento do first command n vezes, consoante o numero
+    de pipes, criando pipes novos de cada vez e gerindo pipes
+    simultaneos
 
 4. last command
