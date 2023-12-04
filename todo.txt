@@ -84,6 +84,7 @@ se possivel, usar logo exit(0) nos errors
 . readme e .vscode?
 
 - ver aquela questão do path dentro da struct all
+- sub-malloc ou wtv
 ----
 
 testing
@@ -100,3 +101,21 @@ Libft:
 bem e sem leaks de memória para não me lixarem futuros projetos
 -> usar o file stuff para testar isso talvez
 -> criar uma newlib reorganizada, em que o getnext e o print usam as funções da libft
+
+----
+mandatory:
+4 args, file in/out, commands 1/2
+
+1. arg processing
+- criar struct;
+- guardar char * com nomes dos files;
+- fork(), pipe() e execve() do "which" command para nos retornar o PATH;
+- esse path vai ser usado no execve dos comandos 1/2
+- guardar tudo na struct all;
+
+2. first command
+- pipe que comunica com a main function
+
+3. (bonus) multiple commands
+
+4. last command
