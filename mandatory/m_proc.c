@@ -127,14 +127,32 @@ char	*proc_which(char *arr)
 
 // --- criar estrutura all e derivados ---
 
+void	print_arr(char **arr) {
+	int	i = 0;
+	while (arr[i])
+		i++;
+	ft_printf("---------------\nthe array has %d elements\n", i);
+	int	j = 0;
+	while (j <= i) {
+		ft_printf("arr[%d]:%s\n", j, arr[j]);
+		j++;
+	}
+}
+//só para teste, apagar depois
+
 t_cmd	*proc_cmds(char **av)
 {
 	t_cmd	*new;
 
 	new = malloc(sizeof(t_cmd));
+	ft_printf("start cmds\n");
+	ft_printf("av[2]: %s\n", av[2]);
 	new->arr = ft_split(av[2], ' '); //primeiro set de comandos na char **
+	print_arr(new->arr);
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
+	print_arr(new->arr);
 	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
+	print_arr(new->arr);
 	new = new->next; //char ** = char ** next
 	new = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
 	new->arr = ft_split(av[3], ' '); //segundo set de comandos na char **
@@ -144,6 +162,8 @@ t_cmd	*proc_cmds(char **av)
 	return(new);
 }
 /*
+pra ja detetei que existe um erro qq na funcao new_arr, ainda n sei qual
+
 so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
 ja sei de antemao que só recebo 4 args
 eu tou a acrescentar NULL no fim, boa
@@ -160,8 +180,10 @@ t_all	*proc_all(char **av)
 	t_all	*all;
 
 	all = malloc(sizeof(t_all));
+	ft_printf("creating all\n");
 	all->file1 = av[1];
 	all->file2 = av[4];
+	ft_printf("file1: %s\nfile2: %s;\n", all->file1, all->file2);
 	all->pipe_nmb = 0; //mandatory, é logo 0
 	all->append = 0; //mandatory, é logo 0
 	all->multi = 0; //mandatory, é logo 0

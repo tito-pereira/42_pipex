@@ -21,9 +21,12 @@ int	main(int ac, char **av)
 	
 	if (ac == 5) //tirar isto no bónus
 	{
+		ft_printf("im in\n");
 		all = proc_all(av);
+		ft_printf("all created\n");
 		in = open(all->file1, O_RDONLY);
 		first_cmd(all, in);
+		ft_printf("first command done\n");
 		//if (all->append == 1 || all->multi == 1)
 			//mult_pipes(all, &p1);
 		last_cmd(all);
