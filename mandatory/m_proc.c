@@ -123,22 +123,28 @@ char	*proc_which(char *arr_zero)
 
 	fd = malloc(2 * sizeof(int));
 	ft_printf("im inside proc_which\n");
+	//ft_printf("arr[0]: %s\n", arr_zero);
+	total = NULL;
 	pid = pipe(fd);
 	tmp = malloc(3 * sizeof(char *));
 	tmp[0] = "/usr/bin/which";
 	tmp[1] = arr_zero;
 	tmp[2] = NULL;
+	ft_printf("tmp[0]: %s\ntmp[1]: %s\ntmp[2]: %s\n", tmp[0], tmp[1], tmp[2]);
+	ft_printf("will fork\n");
 	fork();
-	ft_printf("i forked\n");
 	if (pid == 0)
 		exec_which(fd, tmp);
-	wait(NULL);
-	ft_printf("waited\n");
-	free(tmp); //melhorar este free, char ** nao e char *
-	close(fd[1]);
-	total = read_pipe(fd[0]);
-	close(fd[0]); //ou aqui ou no read_pipe p poupar linhas
-	free(fd);
+	else
+	{
+		wait(NULL);
+		ft_printf("waited\n");
+		free(tmp); //melhorar este free, char ** nao e char *
+		close(fd[1]);
+		total = read_pipe(fd[0]);
+		close(fd[0]); //ou aqui ou no read_pipe p poupar linhas
+		free(fd);
+	}
 	return(total);
 }
 
