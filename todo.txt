@@ -104,6 +104,17 @@ o problema nao e o comando em si, e a maneira como estou
 a processa lo
 
 se calhar e o comando em si q ta mal feito, e nao os pipes e files
+
+nada desta merda ta a fazer sentido
+c ficheiros intermedios, a fechar e abri-los resulta
+DESDE QUE eu tenha cuidado c as flags q uso ao abrir o file,
+tirei o trun e funcionou
+my guess is: FLAGS DO OPEN???
+ou melhor, só funciona se eu fechar+abrir de novo o file
+será o problema mesmo o pointer do file???
+
+->->-> usar este quickfix para resolver o problema do comando mau primeiro
+e depois sim resolver isto e usar o pipe etc
 ----
 Libft:
 -> testar as funções com os novos nomes das auxiliares e verificar q funcionam
