@@ -83,18 +83,12 @@ se possivel, usar logo exit(0) nos errors
 . Makefile
 . readme e .vscode?
 
-- ver aquela questão do path dentro da struct all
-- sub-malloc ou wtv
+- ERROS E FREES
 ----
 
 testing
 
-acho que ta tudo exceto free e erros
-começar a montagem final e os testes
-como testar? suponho que tenho que criar files para usar como input
-ver qual o output que eles mandam
-testar por etapas se estiver a ter muitas dificuldades
-
+- atualmente ta no read_pipe depois do which command
 ----
 Libft:
 -> testar as funções com os novos nomes das auxiliares e verificar q funcionam

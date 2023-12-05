@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:34:00 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/10/30 14:49:14 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:16:46 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int ac, char **av)
 	
 	if (ac == 5) //tirar isto no bónus
 	{
-		ft_printf("im in\n");
+		//ft_printf("im in\n");
 		all = proc_all(av);
-		ft_printf("all created\n");
+		ft_printf("--- STRUCT ALL CREATED ---\n");
 		in = open(all->file1, O_RDONLY);
 		first_cmd(all, in);
 		ft_printf("first command done\n");
