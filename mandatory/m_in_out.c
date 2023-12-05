@@ -20,6 +20,18 @@
 -> pega no file2/argv[5], usa-o como output
 */
 
+void	print_ar(char **arr) {
+	int	i = 0;
+	while (arr[i] != NULL)
+		i++;
+	ft_printf("---------------\nthe array has %d elements\n", i);
+	int	j = 0;
+	while (j <= i) {
+		ft_printf("arr[%d]:%s\n", j, arr[j]);
+		j++;
+	}
+}
+
 void	first_cmd(t_all *all, int in)
 {
 	//-int	*fd;
@@ -46,6 +58,8 @@ void	first_cmd(t_all *all, int in)
 	wait(NULL);
 	//-close(fd[1]);
 	all->cmds = all->cmds->next; //passa para o ultimo/proximo cmds
+	//print_ar(all->cmds->arr);
+	ft_printf("arr[0]: %s\n", all->cmds->arr[0]);
 	all->input = half; //vai dar carry over de leitura para outro sitio
 	close (in);
 	//close (half);
@@ -74,6 +88,8 @@ void	last_cmd(t_all *all)
 		perror("Error with output file\n");
 		//exit(EXIT_FAILURE);
 	}
+	//print_ar(all->cmds->arr);
+	ft_printf("arr[0]: %s\n", all->cmds->arr[0]);
 	pid = fork();
 	if (pid == 0)
 	{

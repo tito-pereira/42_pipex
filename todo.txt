@@ -99,6 +99,10 @@ o primeiro comando funciona
 file half ta tipo
 ultimo comando nao funciona
 
+experimentei com 2 cat seguidos, same thing
+o problema nao e o comando em si, e a maneira como estou
+a processa lo
+
 se calhar e o comando em si q ta mal feito, e nao os pipes e files
 ----
 Libft:

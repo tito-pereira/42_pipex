@@ -204,8 +204,9 @@ t_cmd	*proc_cmds(char **av)
 	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
 	ft_printf("--- SECOND PROCC ---\n");
 	new->next = NULL;
-	new = begin;
-	return(new);
+	print_arr(new->arr);
+	//new = begin;
+	return(begin);
 }
 /*
 pra ja detetei que existe um erro qq na funcao new_arr, ainda n sei qual
