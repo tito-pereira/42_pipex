@@ -88,7 +88,18 @@ se possivel, usar logo exit(0) nos errors
 
 testing
 
-- atualmente ta no read_pipe depois do which command
+o file de output ta a dar erro:
+- se nao existir, cria se mas depois da erro de escrita e leitura dele
+- se ja existir, da erro ao tentar aceder a ele
+erro mesmo estranho desapareceu do nada
+
+o file de output fica vazio, fica em branco
+fiz com ficheiros temporários em vez de pipes
+o primeiro comando funciona
+file half ta tipo
+ultimo comando nao funciona
+
+se calhar e o comando em si q ta mal feito, e nao os pipes e files
 ----
 Libft:
 -> testar as funções com os novos nomes das auxiliares e verificar q funcionam

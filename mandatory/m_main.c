@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:34:00 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/05 17:20:46 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:32:32 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ int	main(int ac, char **av)
 		in = open(all->file1, O_RDONLY);
 		ft_printf("file1 fd: %d\n", in);
 		first_cmd(all, in);
-		ft_printf("first command done\n");
+		ft_printf("--- FIRST COMMAND ---\n");
+		ft_printf("carryover fd: %d\n", all->input);
 		//if (all->append == 1 || all->multi == 1)
 			//mult_pipes(all, &p1);
 		last_cmd(all);
+		ft_printf("--- LAST COMMAND ---\n");
 		//free_all(all);
 	}
 	else

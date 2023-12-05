@@ -9,31 +9,6 @@
 *all.*cmds.*(arr + 0)
 */
 
-void	first_cmd(t_all *all, int in)
-{
-	int	*p1;
-	int	pid;
-
-	p1 = malloc(2 * sizeof(int));
-	//if (pipe(p1) == -1)
-		//man_error(1, p1, all);
-	pid = fork();
-	//if (pid == -1)
-		//man_error(2, p1, all);
-	if (pid == 0)
-	{
-		dup2(in, STDIN_FILENO); //file de input, acho que fecha automatico
-		dup2(p1[1], STDOUT_FILENO); //output é o pipe de escrita
-		close(p1[0]); //fecha a leitura, aqui vai ser só escrever para o pipe
-		close(p1[1]); //ja dupliquei entao fecho
-		execve(all->cmds->arr[0], all->cmds->arr, __environ);
-	}
-	wait(NULL);
-	close(p1[1]);
-	all->cmds = all->cmds->next;
-	all->input = p1[0];
-	free(p1);
-}
 //introduzir o file1 como input no dup2
 
 //all->cmds->path n existe?
@@ -45,27 +20,74 @@ void	first_cmd(t_all *all, int in)
 -> pega no file2/argv[5], usa-o como output
 */
 
+void	first_cmd(t_all *all, int in)
+{
+	//-int	*fd;
+	int	pid;
+	int	half;
+
+	half = open("half.txt", O_RDWR | O_CREAT | O_TRUNC, 0777);
+	//-fd = malloc(2 * sizeof(int));
+	//-pipe(fd);
+	//if (pipe(p1) == -1)
+		//man_error(1, p1, all);
+	ft_printf("inside first command, fd: %d\n", in);
+	pid = fork();
+	//if (pid == -1)
+		//man_error(2, p1, all);
+	if (pid == 0)
+	{
+		dup2(in, STDIN_FILENO); //file de input, acho que fecha automatico
+		dup2(half, STDOUT_FILENO); //output é o pipe de escrita
+		//close(fd[0]); //fecha a leitura, aqui vai ser só escrever para o pipe
+		//close(fd[1]); //ja dupliquei entao fecho
+		execve(all->cmds->arr[0], all->cmds->arr, __environ);
+	}
+	wait(NULL);
+	//-close(fd[1]);
+	all->cmds = all->cmds->next; //passa para o ultimo/proximo cmds
+	all->input = half; //vai dar carry over de leitura para outro sitio
+	close (in);
+	//close (half);
+	ft_printf("final reading fd: %d\n", half);
+	//-free(fd); //NAO POSSO, ou posso? afinal sim
+}
+
+///////////////////////////////////////////////////////////////
+
 void	last_cmd(t_all *all)
 {
 	int	pid;
 	int	out;
 
 	out = 0;
-	if (all->append == 0)
-		out = open(all->file2, O_WRONLY | O_CREAT | O_TRUNC);
-	else if (all->append == 1)
-		out = open(all->file2, O_WRONLY | O_CREAT | O_APPEND);
-	if (out == -1)
-		ft_printf("Error with output file\n");
+	ft_printf("inside last cmd, fd:%d\n", all->input);
+	if (all->append == 0) {
+		ft_printf("%s is getting reset\n", all->file2);
+		out = open(all->file2, O_RDWR | O_CREAT | O_TRUNC, 0777);
+	}
+	else if (all->append == 1) {
+		ft_printf("%s will append\n", all->file2);
+		out = open(all->file2, O_RDWR | O_CREAT | O_APPEND, 0777);
+	}
+	if (out == -1) {
+		perror("Error with output file\n");
+		//exit(EXIT_FAILURE);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
 		dup2(all->input, STDIN_FILENO);
 		dup2(out, STDOUT_FILENO);
+		close(all->input); //dou close na mesma porque eu clonei
+		close(out); //e fiquei com 2 fd para cada
 		execve(all->cmds->arr[0], all->cmds->arr, __environ);
 	}
 	wait(NULL);
-	close(all->input); //acho que automaticamente fecha depois
-	close(out); //same, acho que automaticamente fecha depois
+	close (all->input);
+	close (out);
 }
 //verificar se as flags estão bem e são mesmo estas
+
+	//close(all->input); //acho que automaticamente fecha depois
+	//close(out); //same, acho que automaticamente fecha depois
