@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-// --- suportes ---
+// --- suportes --- //
 
 char	*r_malloc(char *str)
 {
@@ -22,25 +22,37 @@ char	*r_malloc(char *str)
 	free(str);
 	return(new);
 }
+/*
+destroi o malloc e faz um malloc novo c mais 1 byte em branco
+(para poder ler mais 1 byte)
+*/
 
 char	**new_arr(char **arr)
 {
 	char	**new;
-	int	i;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (arr[i] != NULL)
 		i++;
-	new = malloc((i + 1) * sizeof(char *));
-	while (arr[i] != NULL)
+	ft_printf("making new arr\ni: %d\n", i); //tamanho 1
+	new = malloc((i + 1) * sizeof(char *)); //malloc 2
+	j = 0;
+	while (j < i) //while 0<1 [0]
 	{
-		new[i] = arr[i];
-		i++;
+		new[j] = arr[j];
+		j++;
 	}
-	new[i] = NULL;
+	new[i] = NULL; //new[0] = ls; new[1] = NULL;
 	free(arr);
 	return(new);
 }
+/*
+acrescenta em elemento NULL no fim do char **array
+(para ser usado na funcao execve)
+vamos assumir que esta bem
+*/
 
 char	*sub_malloc(char *total)
 {
@@ -60,7 +72,7 @@ char	*sub_malloc(char *total)
 	return (new);
 }
 
-// --- fork which command e derivados ---
+// --- fork which command e derivados --- //
 
 char	*read_pipe(int fd)
 {
@@ -94,13 +106,15 @@ que ler desse file, daí esta função
 
 void	exec_which(int *fd, char **tmp)
 {
-	close(fd[0]); //fecha fd[0]
+	ft_printf("child process, making which command\n");
 	dup2(fd[1], STDOUT_FILENO); //fecha fd[1] dup
+	close(fd[0]); //fecha fd[0]
 	close(fd[1]); // fecha fd[1]
+	//ft_printf("TTTTT\n");
 	execve("/usr/bin/which", tmp, __environ);
 }
 
-char	*proc_which(char *arr)
+char	*proc_which(char *arr_zero)
 {
 	char	*total;
 	char	**tmp;
@@ -108,16 +122,19 @@ char	*proc_which(char *arr)
 	int		pid;
 
 	fd = malloc(2 * sizeof(int));
+	ft_printf("im inside proc_which\n");
 	pid = pipe(fd);
 	tmp = malloc(3 * sizeof(char *));
 	tmp[0] = "/usr/bin/which";
-	tmp[1] = arr;
+	tmp[1] = arr_zero;
 	tmp[2] = NULL;
 	fork();
+	ft_printf("i forked\n");
 	if (pid == 0)
 		exec_which(fd, tmp);
 	wait(NULL);
-	free(tmp);
+	ft_printf("waited\n");
+	free(tmp); //melhorar este free, char ** nao e char *
 	close(fd[1]);
 	total = read_pipe(fd[0]);
 	close(fd[0]); //ou aqui ou no read_pipe p poupar linhas
@@ -125,7 +142,7 @@ char	*proc_which(char *arr)
 	return(total);
 }
 
-// --- criar estrutura all e derivados ---
+// --- criar estrutura all e derivados --- //
 
 void	print_arr(char **arr) {
 	int	i = 0;
@@ -163,6 +180,9 @@ t_cmd	*proc_cmds(char **av)
 }
 /*
 pra ja detetei que existe um erro qq na funcao new_arr, ainda n sei qual
+(vou so assumir q esta bem)
+
+erro na proc_which
 
 so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
 ja sei de antemao que só recebo 4 args

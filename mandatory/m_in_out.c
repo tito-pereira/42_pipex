@@ -50,6 +50,7 @@ void	last_cmd(t_all *all)
 	int	pid;
 	int	out;
 
+	out = 0;
 	if (all->append == 0)
 		out = open(all->file2, O_WRONLY | O_CREAT | O_TRUNC);
 	else if (all->append == 1)
