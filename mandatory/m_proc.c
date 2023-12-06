@@ -110,21 +110,6 @@ char	*read_pipe(int fd)
 }
 
 /*
-como dou mallocs novos constantes no total,
-o ponteiro do read volta sempre ao inicio e so tem 1 char, que esta
-sempre a ser substituido
-e suposto eu saber o numero final ja antes?
-ser suposto usar o which command ou assumir /usr/bin?
-nao ha maneira de saber previamente sem ser assumir /usr/bin
-unica maneira e assumir logo tipo char[100], nao e
-otimizado mas olha
-continua o mm problema? wtf??
-se calhar a funcao read vai logo para o inicio.. ler 100 de cada vez?
-
-leitura parece estar bem agora
-*/
-
-/*
 mandei o output do execve c o "which" command para um pipe, aka,
 file temporário, e agora para o poder usar como char * no meu codigo, tenho
 que ler desse file, daí esta função

@@ -27,22 +27,18 @@
 # define PATH       __environ[32] //nao estou a usar isto
 
 typedef struct s_cmd {
-	//char	*cmd; //so e usado para o which
-	//char	*wch; //passo intermedio de formar o path
-	//char	*path; //posso usar apenas arr[0]
-	//char	**flag;
 	char	**arr;
 	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_all {
 	char	*file1;
-	t_cmd	*cmds;
 	char	*file2;
+	int		pipe_nmb;
+	int		append;
+	int		multi;
 	int		input;
-	int		pipe_nmb; //nº argv - 4 (if flag == 1, argv - 5)
-	int		append; //0 para overwite, 1 para append
-	int		multi; //0 para mandatory, 1 para bonus
+	t_cmd	*cmds;
 }	t_all;
 
 // free, errors
@@ -55,3 +51,8 @@ void	first_cmd(t_all *all, int in);
 void	last_cmd(t_all *all);
 
 #endif
+
+	//char	*cmd; //so e usado para o which
+	//char	*wch; //passo intermedio de formar o path
+	//char	*path; //posso usar apenas arr[0]
+	//char	**flag;
