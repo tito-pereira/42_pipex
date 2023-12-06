@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 15:19:42 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:43:14 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // --- suportes --- //
 
+/*
 char	*r_malloc(char *str)
 {
 	char	*new;
@@ -34,9 +35,29 @@ char	*r_malloc(char *str)
 	free(str);
 	return(new);
 }
-/*
+
 destroi o malloc e faz um malloc novo c mais 1 byte em branco
 (para poder ler mais 1 byte)
+
+char	*sub_malloc(char *total)
+{
+	char	*new;
+	int		len;
+	int		i;
+
+	len = ft_strlen(total);
+	new = malloc(len * sizeof(char));
+	i = 0;
+	while (i <= len)
+	{
+		new[i] = total[i];
+		i--;
+	}
+	new[len] = '\0';
+	return (new);
+}
+
+o mesmo mas retira 1 byte em branco que nao foi usado
 */
 
 char	**new_arr(char **arr)
@@ -65,24 +86,6 @@ acrescenta em elemento NULL no fim do char **array
 (para ser usado na funcao execve)
 vamos assumir que esta bem
 */
-
-char	*sub_malloc(char *total)
-{
-	char	*new;
-	int		len;
-	int		i;
-
-	len = ft_strlen(total);
-	new = malloc(len * sizeof(char));
-	i = 0;
-	while (i <= len)
-	{
-		new[i] = total[i];
-		i--;
-	}
-	new[len] = '\0';
-	return (new);
-}
 
 // --- fork which command e derivados --- //
 
@@ -171,12 +174,6 @@ char	*proc_which(char *arr_zero)
 	ft_printf("final arr[0]:%s.\n", total);
 	return(total);
 }
-
-/*
-atualmente o erro ta na leitura do pipe
-tem que ler /usr/bin/ls ou algo parecido
-nao ta a ler nada
-*/
 
 // --- criar estrutura all e derivados --- //
 

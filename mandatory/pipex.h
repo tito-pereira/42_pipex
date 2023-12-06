@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:31:19 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 15:14:50 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:40:52 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../libft/mylib.h" //usar no read
 
 # define LIMITER    "LIM"
-# define ENV_VAR    __environ //nao estou a usar isto
+# define ENV_VAR    __environ
 # define PATH       __environ[32] //nao estou a usar isto
 
 typedef struct s_cmd {
@@ -45,10 +45,7 @@ typedef struct s_all {
 	int		multi; //0 para mandatory, 1 para bonus
 }	t_all;
 
-//atencao ao mylib/libft porque ha funcoes auxiliares c o mesmo nome
-//se so chamar ft_printf ou getnext na boa, as outras cuidado
-
-// free
+// free, errors
 void	free_all(t_all *all);
 // proc_all
 t_all	*proc_all(char **av);
