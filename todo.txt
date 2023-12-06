@@ -74,7 +74,7 @@ se possivel, usar logo exit(0) nos errors
 . libft parece compilar direito
 . make pipe loop bonus (acho que ta)
 . proc all (parece estar)
-. (STDIN e STDOUT library)
+. (STDIN e STDOUT library - unistd.h)
 . (last cmd flags)
 . (erros, first cmd, etc)
 
@@ -84,6 +84,9 @@ se possivel, usar logo exit(0) nos errors
 . readme e .vscode?
 
 - ERROS E FREES
+- testar bonus
+- testar c mais comandos (ls, cat, wc, greps)
+
 ----
 
 testing

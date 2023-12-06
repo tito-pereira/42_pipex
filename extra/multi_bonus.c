@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   multi_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/06 15:21:53 by tibarbos          #+#    #+#             */
+/*   Updated: 2023/12/06 15:23:36 by tibarbos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 /*
@@ -32,7 +44,7 @@ void	mult_pipes(t_all *all)
 	int	pid;
 	int	*p2;
 
-	while (all->n_pipes > 0)
+	while (all->pipe_nmb > 0)
 	{
 		p2 = malloc(2 * sizeof(int));
 		pipe(p2);
@@ -43,12 +55,12 @@ void	mult_pipes(t_all *all)
 			dup2(p2[1], STDOUT_FILENO); //fecha-o depois
 			close(p2[0]); //nao vou ler deste, posso fechar
 			close(p2[1]); //ja foi dupped, posso fechar
-			execve(all->cmds, all->arr, __environ);
+			execve(all->cmds->arr[0], all->cmds->arr, ENV_VAR);
 		}
 		wait(NULL);
 		close(p2[1]);
 		all->cmds = all->cmds->next;
-		all->n_pipes--;
+		all->pipe_nmb--;
 		all->input = p2[0];
 		free(p2);
 	}

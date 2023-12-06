@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   m_proc.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
+/*   Updated: 2023/12/06 15:19:42 by tibarbos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 // --- suportes --- //
@@ -121,7 +133,7 @@ void	exec_which(int pid, int *fd, char **tmp)
 	ft_printf("pid:%d, child process, making which command, fd[1]:%d\n", pid, fd[1]);
 	dup2(fd[1], STDOUT_FILENO); //fecha fd[1] dup
 	close(fd[1]); // fecha fd[1]
-	if (execve("/usr/bin/which", tmp, __environ) == -1) {
+	if (execve("/usr/bin/which", tmp, ENV_VAR) == -1) {
 		perror("error on execve\n");
 	};
 }
@@ -209,11 +221,6 @@ t_cmd	*proc_cmds(char **av)
 	return(begin);
 }
 /*
-pra ja detetei que existe um erro qq na funcao new_arr, ainda n sei qual
-(vou so assumir q esta bem)
-
-erro na proc_which
-
 so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
 ja sei de antemao que só recebo 4 args
 eu tou a acrescentar NULL no fim, boa

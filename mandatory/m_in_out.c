@@ -1,24 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   m_in_out.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/06 15:19:16 by tibarbos          #+#    #+#             */
+/*   Updated: 2023/12/06 15:19:26 by tibarbos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
-
-/*
--> pipe entre main process (fd[0]) e first child process (fd[1]);
--> primeiro dup2(fd[1], 1) + execve();
--> retornar fd[0] para ser lido e usado pelo main process depois
-
-(all *)cmds
-*all.*cmds.*(arr + 0)
-*/
-
-//introduzir o file1 como input no dup2
-
-//all->cmds->path n existe?
-//será que é o arr[0] ou preciso de voltar a incluir um path???
-
-/*
--> dependendo de bonus ou nao, faz open() c flags diferentes
--> pega no fd[0] do ultimo comando, usa-o como input
--> pega no file2/argv[5], usa-o como output
-*/
 
 void	print_ar(char **arr) {
 	int	i = 0;
@@ -53,7 +45,7 @@ void	first_cmd(t_all *all, int in)
 		dup2(fd[1], STDOUT_FILENO); //output é o pipe de escrita
 		close(in); //fecha a leitura, aqui vai ser só escrever para o pipe
 		close(fd[1]); //ja dupliquei entao fecho
-		execve(all->cmds->arr[0], all->cmds->arr, __environ);
+		execve(all->cmds->arr[0], all->cmds->arr, ENV_VAR);
 	}
 	wait(NULL);
 	close(fd[1]);
@@ -66,8 +58,6 @@ void	first_cmd(t_all *all, int in)
 	ft_printf("final reading fd: %d\n", fd[0]);
 	free(fd); //NAO POSSO, ou posso? afinal sim
 }
-
-///////////////////////////////////////////////////////////////
 
 void	last_cmd(t_all *all)
 {
@@ -98,17 +88,9 @@ void	last_cmd(t_all *all)
 		dup2(out, STDOUT_FILENO);
 		close(all->input); //dou close na mesma porque eu clonei
 		close(out); //e fiquei com 2 fd para cada
-		execve(all->cmds->arr[0], all->cmds->arr, __environ);
+		execve(all->cmds->arr[0], all->cmds->arr, ENV_VAR);
 	}
 	wait(NULL);
 	close (all->input);
 	close (out);
 }
-//verificar se as flags estão bem e são mesmo estas
-
-/*
--> primeiro testar o meu comando
-. wc -l, cmds->next, etc
-
--> so depois resolver esta questao do file pointer???
-*/
