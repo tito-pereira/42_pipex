@@ -34,14 +34,14 @@ void	print_ar(char **arr) {
 
 void	first_cmd(t_all *all, int in)
 {
-	//-int	*fd;
+	int	*fd;
 	int	pid;
-	int	half;
+	//int	half;
 
-	half = open("half.txt", O_RDWR | O_CREAT, 0777);
-	//-fd = malloc(2 * sizeof(int));
-	//-pipe(fd);
-	//if (pipe(p1) == -1)
+	//half = open("half.txt", O_RDWR | O_CREAT, 0777);
+	fd = malloc(2 * sizeof(int));
+	pipe(fd);
+	//if (pipe(fd) == -1)
 		//man_error(1, p1, all);
 	ft_printf("inside first command, fd: %d\n", in);
 	pid = fork();
@@ -50,21 +50,21 @@ void	first_cmd(t_all *all, int in)
 	if (pid == 0)
 	{
 		dup2(in, STDIN_FILENO); //file de input, acho que fecha automatico
-		dup2(half, STDOUT_FILENO); //output é o pipe de escrita
+		dup2(fd[1], STDOUT_FILENO); //output é o pipe de escrita
 		close(in); //fecha a leitura, aqui vai ser só escrever para o pipe
-		close(half); //ja dupliquei entao fecho
+		close(fd[1]); //ja dupliquei entao fecho
 		execve(all->cmds->arr[0], all->cmds->arr, __environ);
 	}
 	wait(NULL);
-	//-close(fd[1]);
-	//all->cmds = all->cmds->next; //passa para o ultimo/proximo cmds
+	close(fd[1]);
+	all->cmds = all->cmds->next; //passa para o ultimo/proximo cmds
 	//print_ar(all->cmds->arr);
 	ft_printf("arr[0]: %s\n", all->cmds->arr[0]);
-	all->input = 0; //vai dar carry over de leitura para outro sitio
+	all->input = fd[0]; //vai dar carry over de leitura para outro sitio
 	close (in);
-	close (half);
-	ft_printf("final reading fd: %d\n", half);
-	//-free(fd); //NAO POSSO, ou posso? afinal sim
+	close (fd[1]);
+	ft_printf("final reading fd: %d\n", fd[0]);
+	free(fd); //NAO POSSO, ou posso? afinal sim
 }
 
 ///////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ void	last_cmd(t_all *all)
 	int	out;
 
 	out = 0;
-	all->input = open("half.txt", O_RDWR | O_CREAT, 0777);
+	//all->input = open("half.txt", O_RDWR | O_CREAT, 0777);
 	ft_printf("inside last cmd, input fd:%d\n", all->input);
 	if (all->append == 0) {
 		ft_printf("%s is getting reset\n", all->file2);

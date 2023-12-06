@@ -197,8 +197,8 @@ t_cmd	*proc_cmds(char **av)
 	print_arr(new->arr);
 	ft_printf("--- FIRST PROCC ---\n");
 	begin = new;
+	new->next = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
 	new = new->next; //char ** = char ** next
-	new = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
 	new->arr = ft_split(av[3], ' '); //segundo set de comandos na char **
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH

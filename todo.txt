@@ -88,33 +88,22 @@ se possivel, usar logo exit(0) nos errors
 
 testing
 
-o file de output ta a dar erro:
-- se nao existir, cria se mas depois da erro de escrita e leitura dele
-- se ja existir, da erro ao tentar aceder a ele
-erro mesmo estranho desapareceu do nada
+este erro estava a deixar me irritado c razao, porque nao faz
+sentido, a sintaxe tava bem
 
-o file de output fica vazio, fica em branco
-fiz com ficheiros temporários em vez de pipes
-o primeiro comando funciona
-file half ta tipo
-ultimo comando nao funciona
-
-experimentei com 2 cat seguidos, same thing
-o problema nao e o comando em si, e a maneira como estou
-a processa lo
-
-se calhar e o comando em si q ta mal feito, e nao os pipes e files
-
-nada desta merda ta a fazer sentido
-c ficheiros intermedios, a fechar e abri-los resulta
-DESDE QUE eu tenha cuidado c as flags q uso ao abrir o file,
-tirei o trun e funcionou
-my guess is: FLAGS DO OPEN???
-ou melhor, só funciona se eu fechar+abrir de novo o file
-será o problema mesmo o pointer do file???
+pipes estavam bem, comando estava bem, nada de pointers
+era problema daquela merda do proc
+pipe V
+comando V
+acho que ta feito
 
 ->->-> usar este quickfix para resolver o problema do comando mau primeiro
 e depois sim resolver isto e usar o pipe etc
+else if (all->cmds->next == NULL) {
+		ft_printf("next is NULL!!!\n");
+	}
+no proc, em vez de new = new->next; new = malloc,
+fiz new->next = malloc; new = new->next e passou a dar
 ----
 Libft:
 -> testar as funções com os novos nomes das auxiliares e verificar q funcionam
