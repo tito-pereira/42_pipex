@@ -105,3 +105,10 @@ void	last_cmd(t_all *all)
 	close (out);
 }
 //verificar se as flags estão bem e são mesmo estas
+
+/*
+-> primeiro testar o meu comando
+. wc -l, cmds->next, etc
+
+-> so depois resolver esta questao do file pointer???
+*/
