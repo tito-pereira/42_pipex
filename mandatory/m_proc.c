@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 15:43:14 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:23:25 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,15 +190,15 @@ void	print_arr(char **arr) {
 }
 //só para teste, apagar depois
 
-t_cmd	*proc_cmds(char **av)
+t_cmd	*proc_cmds(char **av, int index_a, int index_b)
 {
 	t_cmd	*new;
 	t_cmd	*begin;
 
 	new = malloc(sizeof(t_cmd));
 	ft_printf("start cmds\n");
-	ft_printf("av[2]: %s\n", av[2]);
-	new->arr = ft_split(av[2], ' '); //primeiro set de comandos na char **
+	ft_printf("av[2]: %s\n", av[index_a]);
+	new->arr = ft_split(av[index_a], ' '); //primeiro set de comandos na char **
 	print_arr(new->arr);
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	print_arr(new->arr);
@@ -208,7 +208,7 @@ t_cmd	*proc_cmds(char **av)
 	begin = new;
 	new->next = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
 	new = new->next; //char ** = char ** next
-	new->arr = ft_split(av[3], ' '); //segundo set de comandos na char **
+	new->arr = ft_split(av[index_b], ' '); //segundo set de comandos na char **
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
 	ft_printf("--- SECOND PROCC ---\n");
@@ -218,6 +218,8 @@ t_cmd	*proc_cmds(char **av)
 	return(begin);
 }
 /*
+INTRODUZIR VARIAVEIS DE INDEX NMB
+
 so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
 ja sei de antemao que só recebo 4 args
 eu tou a acrescentar NULL no fim, boa
@@ -242,7 +244,7 @@ t_all	*proc_all(char **av)
 	all->append = 0; //mandatory, é logo 0
 	all->multi = 0; //mandatory, é logo 0
 	all->input = -1; //usado mais à frente
-	all->cmds = proc_cmds(av);
+	all->cmds = proc_cmds(av, 2, 3);
 	return(all);
 }
 

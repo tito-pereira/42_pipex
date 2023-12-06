@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 16:09:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:49:26 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,9 @@ nao posso usar o proc commands normal, vou precisar do proc cmds bonus
 
 t_all	*proc_central(t_all *all, int ac, char **av)
 {
-	//int	args;
-	//args = 0;
-	//while(av[args] != NULL)
-		//args++;
-	//if (args == 5)
-		//proc_all(av);
+	t_bflags	*flags;
+
+	flags = malloc(sizeof(t_bflags));
 	if (av[1] == "here_doc" && ac == 5) //append = 1; multi = 0
 		all = proc_app(all);
 	else if (av[1] != "here_doc" && ac > 5) //append = 0; multi = 1
@@ -149,17 +146,87 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 	else if (av[1] == "here_doc" && ac > 5) //append = 1; multi = 1
 		all = proc_app_mult(all);
 	return(all);
+	///////////////////
+	if (av[1] == "here_doc") //com append
+	{
+		flags->heredoc = 1;
+		all = proc_heredoc(all); //cria um all, sem cmds, so c flags e files
+		if (ac == 6)
+			all->cmds = proc_cmds(av, 3, 4); //a = 1; m = 0;
+		else
+			all = multi_cmds(all); //a = 1; m = 1;
+	}
+	else //sem append
+		all = multi_proc(all); //a = 0; m = 1;
+	return (all);
+	/////////////////////
+	if (av[1] == "here_doc") //com append
+	{
+		flags->heredoc = 1;
+		//all = proc_heredoc(all); //cria um all, sem cmds, so c flags e files
+		if (ac == 6)
+			all->cmds = proc_cmds(av, 3, 4); //a = 1; m = 0;
+		else
+			all = multi_cmds(all); //a = 1; m = 1;
+	}
+	else //sem append
+		all = multi_proc(all); //a = 0; m = 1;
+	return (all);
 }
 
 /*
-e se eu tentar modular os dois tipos de bonus
-dois processamentos isolados q podem ser usados ambos ou sozinhos
-em vez de fazer 3 ifs
+proc all bonus
+semelhante a proc all mas sem a parte dos cmds
+e altero os files e flags, e serve para todos os bonus
+
+struct so c flags, t_bflags
+index_a
+index_b
+nmb
+append
+multi
+heredoc (true false, 0/1)
+
+tenho de introduzir variaveis de index a e b nas funcoes de
+proc cmds, assim posso usar a mesma funcao no normie e no bonus, em vez de
+funcoes diferentes so porque muda o av[2] para av[3];
 
 multi pipes - 5 args ou mais
 append - 5 args
 */
 
+t_all	*proc_heredoc(char **av, t_bflags *flags)
+{
+	t_all	*all;
+
+	all = malloc(sizeof(t_all));
+	all->file1 = proc_delim();
+	all->file2 = ???; //depende?
+	all->pipe_nmb = ???; //mandatory, é logo 0
+	all->append = 1; //mandatory, é logo 0
+	all->multi = ???; //mandatory, é logo 0
+	all->input = -1; //usado mais à frente
+	//all->cmds = proc_cmds(av);
+	return(all);
+}
+
+t_all	*proc_all_bonus(char **av, t_bflags *flags)
+{
+	t_all	*all;
+
+	all = malloc(sizeof(t_all));
+	if (flags->heredoc == 1)
+		all->file1 = proc_delim();
+	else
+		all->file1 = flags->ind_a;
+	all->file2 = flags->ind_b;
+	all->pipe_nmb = flags->nmb; //mandatory, é logo 0
+	all->append = flags->append; //mandatory, é logo 0
+	all->multi = flags->multi; //mandatory, é logo 0
+	all->input = -1; //usado mais à frente
+	//all->cmds = proc_cmds(av);
+	return(all);
+}
 
 //--------------------------//--------------------------
 //--------------------------//--------------------------
@@ -167,6 +234,13 @@ append - 5 args
 //--------------------------//--------------------------
 //--------------------------//--------------------------
 //--------------------------//--------------------------
+
+//int	args;
+	//args = 0;
+	//while(av[args] != NULL)
+		//args++;
+	//if (args == 5)
+		//proc_all(av);
 
 char	**new_arr(char **arr)
 {
@@ -298,15 +372,15 @@ void	print_arr(char **arr) {
 }
 //só para teste, apagar depois
 
-t_cmd	*proc_cmds(char **av)
+t_cmd	*proc_cmds(char **av, int index_a, int index_b)
 {
 	t_cmd	*new;
 	t_cmd	*begin;
 
 	new = malloc(sizeof(t_cmd));
 	ft_printf("start cmds\n");
-	ft_printf("av[2]: %s\n", av[2]);
-	new->arr = ft_split(av[2], ' '); //primeiro set de comandos na char **
+	ft_printf("av[2]: %s\n", av[index_a]);
+	new->arr = ft_split(av[index_a], ' '); //primeiro set de comandos na char **
 	print_arr(new->arr);
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	print_arr(new->arr);
@@ -316,7 +390,7 @@ t_cmd	*proc_cmds(char **av)
 	begin = new;
 	new->next = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
 	new = new->next; //char ** = char ** next
-	new->arr = ft_split(av[3], ' '); //segundo set de comandos na char **
+	new->arr = ft_split(av[index_b], ' '); //segundo set de comandos na char **
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
 	ft_printf("--- SECOND PROCC ---\n");
@@ -324,32 +398,4 @@ t_cmd	*proc_cmds(char **av)
 	print_arr(new->arr);
 	//new = begin;
 	return(begin);
-}
-/*
-so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
-ja sei de antemao que só recebo 4 args
-eu tou a acrescentar NULL no fim, boa
-mas tou so a alterar o arr[0] para o seu path
-e nao estou a repeti-lo
-devia ser:
-arr[0] = command path (which command)
-arr[1] = igual (repeat)
-acho que vou ter que duplicar primeiro o arr[0] e so depois modificar
-*/
-
-t_all	*proc_all(char **av)
-{
-	t_all	*all;
-
-	all = malloc(sizeof(t_all));
-	//ft_printf("creating all\n");
-	all->file1 = av[1];
-	all->file2 = av[4];
-	ft_printf("file1: %s\nfile2: %s;\n", all->file1, all->file2);
-	all->pipe_nmb = 0; //mandatory, é logo 0
-	all->append = 0; //mandatory, é logo 0
-	all->multi = 0; //mandatory, é logo 0
-	all->input = -1; //usado mais à frente
-	all->cmds = proc_cmds(av);
-	return(all);
 }
