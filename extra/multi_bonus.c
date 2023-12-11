@@ -39,6 +39,7 @@ void	first_cmd(int *p1, t_all *all)
 }
 */
 
+/*
 void	mult_pipes(t_all *all)
 {
 	int	pid;
@@ -65,6 +66,7 @@ void	mult_pipes(t_all *all)
 		free(p2);
 	}
 }
+*/
 //falta a troca de pipes, mallocs, frees, etc
 //mudar o malloc para onde p1 aponta
 

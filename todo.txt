@@ -87,6 +87,15 @@ se possivel, usar logo exit(0) nos errors
 - testar bonus
 - testar c mais comandos (ls, cat, wc, greps)
 
+lembro me de ter a parte mandatory já a funcionar
+agora faltava testar o bonus
+depois ainda falta
+- error e frees
+- testar frees
+- norminette
+- valgrind (mandatory e bonus)
+- ver correção online a ver se falta algo
+
 ----
 
 testing
@@ -130,25 +139,3 @@ que está no header então não deteta nem cria problemas
 a diferença se calhar está entre compilar uma biblioteca e um programa? idk
 biblio: .c=.o, compile .a
 exec: .c=.o, compile exec
-----
-mandatory:
-4 args, file in/out, commands 1/2
-
-1. arg processing
-- criar struct;
-- guardar char * com nomes dos files;
-- fork(), pipe() e execve() do "which" command para nos retornar o PATH;
-- esse path vai ser usado no execve dos comandos 1/2
-- guardar tudo na struct all;
-
-2. first command
-- pipe[0] que comunica com a main function;
-- fork, execve do primeiro comando,
-    dup() para redirecionar output para pipe, pipe[1] do output;
-
-3. (bonus) multiple commands
-- repetir o procedimento do first command n vezes, consoante o numero
-    de pipes, criando pipes novos de cada vez e gerindo pipes
-    simultaneos
-
-4. last command

@@ -12,6 +12,8 @@
 
 #include "pipex_bonus.h"
 
+/*
+
 char	*ft_strdup(char *src)
 {
 	char	*dest;
@@ -94,7 +96,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = '\0';
 	return (str);
-}
+}*/
 /*
 parece me que a strjoin junta tudo, strnula ou não
 cada strjoin da malloc, preciso de libertar
@@ -107,7 +109,7 @@ ver se da strdup de NULL, se retorna NULL
 ver se o mecanismo de ler do stdin é este
 caso seja, ja acabei o projeto
 caso n seja, tenho que refazer só esta parte
-amanha testar o bonus
+amanha testar o bonus 
 */
 
 char	*ft_str_find(char *str, char *lim)
@@ -249,6 +251,13 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 }
 
 /*
+para além disso, ainda tenho que testar a nova improved
+proc cmds, que serve tanto para normie como para bonus
+
+acho que não preciso do multi bonus, faço tudo diretamente aqui no
+proc bonus e se for preciso divido depois
+senao tmb tenho a versao antiga a weird all
+
 se eu usar o pipe_nmb na normie, vou ter que considerar
 o normie como 1 e o bonus começa em 2, por isso, em vez de
 -5 acho q é - 4? ac - 4 - all->append
@@ -299,6 +308,7 @@ multi pipes - 5 args ou mais
 append - 5 args
 */
 
+/*
 t_all	*proc_heredoc(char **av, t_bflags *flags)
 {
 	t_all	*all;
@@ -331,133 +341,4 @@ t_all	*proc_all_bonus(char **av, t_bflags *flags)
 	//all->cmds = proc_cmds(av);
 	return(all);
 }
-
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-///////////////////////////////////////
-
-char	*read_term()
-{
-	char	*new;
-	char	*tmp;
-	int		i;
-	int		err;
-
-	i = 0;
-	err = 1;
-	new = malloc(sizeof(char));
-	new = '\0';
-	tmp = malloc(2 * sizeof(char));
-	tmp[1] = '\0';
-	while(i++ && err != 0)
-	{
-		err = read(0, tmp, 1);
-		if (err == 0)
-		{
-			free(tmp);
-			return(new);
-		}
-		//sera q adiciono err = -1 e um erro?
-		tmp[err] = '\0';
-		new = fill_chest(tmp, new);
-		if(new[i] == 'M')
-		{
-			if(new[i - 1] == 'I')
-			{
-				if(new[i - 2] == 'L')
-				{
-					free(tmp);
-					break ;
-				}
-			}
-		}
-	}
-	return(new);
-}
-
-/*
-torna-se inutil se o LIMITER for decidido pelo enunciado e nao por mim
-ya, sao 5 args, av[2] e o delimiter
 */
-
-char	*fill_chest(char *tmp, char *old)
-{
-	char	*new;
-	int	len;
-	int	i;
-
-	i = 0;
-	len = ft_strlen(old);
-	new = malloc((len + 2) * sizeof(char));
-	while (old[i] != '\0')
-	{
-		new[i] = old[i];
-		i++;
-	}
-	new[len] = tmp[0];
-	new[len + 1] = '\0';
-	free(old); //acho que é preciso não? testar depois
-	return(new);
-}
-
-/*
-função usada para ler do terminal 
-new
-
-eu nao posso ler varias vezes para o mesmo sitio
-aquilo nao acumula o buffer, apenas o substitui
-
-acrescentar as condições de fim de leitura quando a funcao read()
-retorna 0
-fazer a função de_malloc, que retira o espaço em branco
-*/
-
-/*
-faco if sucessivos em vez de um só if ou while porque, no inicio,
-so vou ter malloc de 1 e nao consigo aceder a 3 posicoes de pointer se só
-existe uma, vai dar erro de compilação
-size of 1, se eu tentar aceder a 3 posições vai dar logo erro
-*/
-
-t_all	*proc_all_new(char **av)
-{
-	t_all	*all;
-	int	c;
-
-	c = 0;
-	all = malloc(sizeof(t_all));
-	if (av[1] == "here_doc")
-	{
-		all->append = 1;
-		av[1] = read_term();
-	}
-	else
-		all->append = 0;
-	all->file1 = av[1];
-	while (av[c] != NULL)
-		c++;
-	if (c == 5)
-	{
-		all->pipe_nmb = 0;
-		all->multi = 0;
-		all->file2 = av[4];
-	}
-	else
-	{
-		all->pipe_nmb = c - 5; //menos qq coisa, c - 5 p exemplo
-		all->multi = 1;
-		all->file2 = av[c];
-	}
-	all->input = -1; //usado mais à frente
-	all->cmds = proc_cmds_bonus(av);
-	return(all);
-}
