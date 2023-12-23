@@ -12,16 +12,17 @@
 
 #include "pipex_bonus.h"
 
-int		main()
+int		main(int ac, char **av)
 {
 	int 	in;
 	t_all 	*all;
 
 	if (ac >= 5)
 	{
-		all = proc_central(av);
+		all = proc_central(all, ac, av);
 		in = open(all->file1, O_RDONLY);
 		first_cmd(all, in);
+		//multi pipes
 		last_cmd(all);
 	}
 	else
@@ -32,6 +33,10 @@ int		main()
 /*
 agora a questão é, proc all ou proc central?
 e o all leva malloc dentro da proc central?
+ah ya falta fazer agora multiplos pipes
+first
+multi pipes
+last
 
 int	main(int ac, char **av)
 {
