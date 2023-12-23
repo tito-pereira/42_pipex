@@ -69,7 +69,7 @@ char	**new_arr(char **arr)
 	i = 0;
 	while (arr[i] != NULL)
 		i++;
-	ft_printf("putting NULL on the end, initial size: %d\n", i); //tamanho 1
+	//ft_printf("putting NULL on the end, initial size: %d\n", i); //tamanho 1
 	new = malloc((i + 1) * sizeof(char *)); //malloc 2
 	j = 0;
 	while (j < i) //while 0<1 [0]
@@ -95,15 +95,15 @@ char	*read_pipe(int fd)
 	int		err;
 
 	err = 100;
-	ft_printf("RRRRRRRRRRRR\nlets check reading errors, reading fd:%d\n", fd);
+	//ft_printf("RRRRRRRRRRRR\nlets check reading errors, reading fd:%d\n", fd);
 	total = malloc(100 * sizeof(char));
 	while (err == 100)
 	{
 		err = read(fd, total, 100);
-		ft_printf("err:%d, ", err);
+		//ft_printf("err:%d, ", err);
 		if (err == 0)
 			break ;
-		ft_printf("total:%s.\n", total);
+		//ft_printf("total:%s.\n", total);
 	}
 	total[err - 1] = '\0'; // - 1 pra retirar o standard \n no fim do output
 	return(total);
@@ -115,10 +115,10 @@ file temporário, e agora para o poder usar como char * no meu codigo, tenho
 que ler desse file, daí esta função
 */
 
-void	exec_which(int pid, int *fd, char **tmp)
+void	exec_which(int *fd, char **tmp)
 {
 	close(fd[0]); //fecha fd[0]
-	ft_printf("pid:%d, child process, making which command, fd[1]:%d\n", pid, fd[1]);
+	//ft_printf("pid:%d, child process, making which command, fd[1]:%d\n", pid, fd[1]);
 	dup2(fd[1], STDOUT_FILENO); //fecha fd[1] dup
 	close(fd[1]); // fecha fd[1]
 	if (execve("/usr/bin/which", tmp, ENV_VAR) == -1) {
@@ -134,29 +134,29 @@ char	*proc_which(char *arr_zero)
 	int		pid;
 
 	fd = malloc(2 * sizeof(int));
-	ft_printf("================\nputting PATH on first element\n");
-	ft_printf("initial arr[0]:%s.\n", arr_zero);
+	//ft_printf("================\nputting PATH on first element\n");
+	//ft_printf("initial arr[0]:%s.\n", arr_zero);
 	pipe(fd);
-	ft_printf("fd[0]: %d, fd[1]: %d\n", fd[0], fd[1]);
+	//ft_printf("fd[0]: %d, fd[1]: %d\n", fd[0], fd[1]);
 	tmp = malloc(3 * sizeof(char *));
 	tmp[0] = "/usr/bin/which";
 	tmp[1] = arr_zero;
 	tmp[2] = NULL;
-	ft_printf("tmp[0]:%s.\ntmp[1]:%s.\ntmp[2]:%s.\n", tmp[0], tmp[1], tmp[2]);
-	ft_printf("will fork\n");
+	//ft_printf("tmp[0]:%s.\ntmp[1]:%s.\ntmp[2]:%s.\n", tmp[0], tmp[1], tmp[2]);
+	//ft_printf("will fork\n");
 	pid = fork();
 	if (pid == -1)
 		perror("error on fork\n");
 	if (pid == 0)
 		exec_which(pid, fd, tmp);
 	wait(NULL);
-	printf("parent pid: %d, fd[0]: %d\n", pid, fd[0]);
+	//printf("parent pid: %d, fd[0]: %d\n", pid, fd[0]);
 	free(tmp); //melhorar este free, char ** nao e char *
 	close(fd[1]);
 	total = read_pipe(fd[0]);
 	close(fd[0]); //ou aqui ou no read_pipe p poupar linhas
 	free(fd);
-	ft_printf("final arr[0]:%s.\n", total);
+	//ft_printf("final arr[0]:%s.\n", total);
 	return(total);
 }
 
@@ -175,6 +175,7 @@ void	print_arr(char **arr) {
 }
 //só para teste, apagar depois
 
+/*
 t_cmd	*proc_cmds(char **av, int index_a, int index_b)
 {
 	t_cmd	*new;
@@ -202,8 +203,62 @@ t_cmd	*proc_cmds(char **av, int index_a, int index_b)
 	//new = begin;
 	return(begin);
 }
+
+t_cmd	*proc_cmds(char **av, int index_a, int index_b)
+{
+	t_cmd	*new;
+	t_cmd	*begin;
+
+	new = malloc(sizeof(t_cmd));
+	new->arr = ft_split(av[index_a], ' '); //primeiro set de comandos na char **
+	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
+	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
+	begin = new;
+	new->next = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
+	new = new->next; //char ** = char ** next
+	new->arr = ft_split(av[index_b], ' '); //segundo set de comandos na char **
+	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
+	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
+	new->next = NULL;
+	return(begin);
+}
+*/
+
+t_cmd	*proc_cmds(t_all *all, char **av, int index)
+{
+	t_cmd	*new;
+	t_cmd	*begin;
+
+	new = malloc(sizeof(t_cmd));
+	new->arr = ft_split(av[index], ' '); //primeiro set de comandos na char **
+	//ft_printf("INDEX: %d\n", index);
+	//print_arr(new->arr);
+	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
+	//ft_printf("INDEX: %d\n", index);
+	//print_arr(new->arr);
+	new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
+	//ft_printf("INDEX: %d\n", index);
+	//print_arr(new->arr);
+	begin = new;
+	//ft_printf("PIPE NMB: %d\n", all->pipe_nmb);
+	//ft_printf("----- OTHER COMMANDS -----\n");
+	while (all->pipe_nmb > 0)
+	{
+		index++;
+		new->next = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
+		new = new->next; //char ** = char ** next
+		new->arr = ft_split(av[index], ' '); //segundo set de comandos na char **
+		new->arr = new_arr(new->arr); //acrescenta o NULL no fim
+		new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
+		new->next = NULL;
+		//ft_printf("INDEX: %d\n", index);
+		//print_arr(new->arr);
+		all->pipe_nmb--;
+	}
+	return(begin);
+}
+
 /*
-INTRODUZIR VARIAVEIS DE INDEX NMB
 
 so fazemos av[2] e [3] porque este é a parte mandatory, sem bonus,
 ja sei de antemao que só recebo 4 args
@@ -224,16 +279,21 @@ t_all	*proc_all(char **av)
 	//ft_printf("creating all\n");
 	all->file1 = av[1];
 	all->file2 = av[4];
-	ft_printf("file1: %s\nfile2: %s;\n", all->file1, all->file2);
-	all->pipe_nmb = 0; //mandatory, é logo 0
+	//ft_printf("file1: %s\nfile2: %s;\n", all->file1, all->file2);
+	all->pipe_nmb = 1;
 	all->append = 0; //mandatory, é logo 0
 	all->multi = 0; //mandatory, é logo 0
 	all->input = -1; //usado mais à frente
-	all->cmds = proc_cmds(av, 2, 3);
+	all->cmds = proc_cmds(all, av, 2);
 	return(all);
 }
 
 // --- rascunhos ---
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
+//--------------------------------------
 
 /*
 all->cmds = malloc(sizeof(t_cmd));
@@ -275,6 +335,7 @@ será que preciso do \0 ou já vem?
 */
 
 /*
+
 typedef struct s_cmd {
 	char	*cmd; // grep
 	char	*wch; // /usr/bin

@@ -115,7 +115,8 @@ amanha testar o bonus
 char	*ft_str_find(char *str, char *lim)
 {
 	int		i;
-	char	ret;
+	int		j;
+	char	*ret;
 
 	i = 0;
 	j = 0;
@@ -141,6 +142,7 @@ char	*proc_delim(char *lim)
 {
 	char	*shovel;
 	char	*chest;
+	char	*total;
 	int		r;
 
 	r = 1;
@@ -161,6 +163,7 @@ char	*proc_delim(char *lim)
 	return (NULL);
 }
 
+/*
 t_cmd	*proc_cmds(char **av, int index)
 {
 	t_cmd	*new;
@@ -183,39 +186,7 @@ t_cmd	*proc_cmds(char **av, int index)
 		all->pipe_nmb--;
 	}
 	return(begin);
-}
-
-/*
-e ainda consigo simplificar mais a parte dos cmds se eu fizer uma só
-função geral para normie e bonus
-*/
-
-t_all	*weird_all(t_all *all, int ac, char **av)
-{
-	all->file1 = av[1];
-	all->file2 = av[ac - 1];
-	all->append = 0;
-	all->pipe_nmb = 0;
-	all->multi = 0;
-	all->input = -1;
-	if (av[1] == "here_doc")
-	{
-		all->append = 1;
-		all->file1 = proc_delim(av[2]);
-	}
-	if (ac > 6)
-	{
-		all->multi = 1;
-		all->pipe_nmb = ac - 5 - all->append;
-	}
-	if (all->append == 1 && ac == 6)
-		all->cmds = proc_cmds(av, 3, 4); //unica situcação q se usa normie
-	else
-		all->cmds = proc_multi_cmds(ac, av, flag); //flag para ver se é append ou nao
-	return(all);
-}
-
-///////////
+}*/
 
 t_all	*init_all(t_all *all, int ac, char **av)
 {
@@ -229,14 +200,25 @@ t_all	*init_all(t_all *all, int ac, char **av)
 	return(all);
 }
 
+int		comp_here_doc(char *av)
+{
+	if (ft_strlen(av) == 8)
+	{
+		if (av[0] == 'h' && av[1] == 'e' && av[2] == 'r' && av[3] == 'e'
+			&& av[4] == '_' && av[5] == 'd' && av[6] == 'o' && av[7] == 'c')
+		return (1);
+	}
+	return (0);
+}
+
 t_all	*proc_central(t_all *all, int ac, char **av)
 {
 	all = malloc(sizeof(t_all));
 	all = init_all(all, ac, av);
-	if (av[1] == "here_doc") //com append
+	if (comp_here_doc(av[1]) == 1) //com append
 	{
 		all->append = 1;
-		all->file1 = proc_delim(av[2]);
+		all->file1 = proc_delim(av[2]); //esta função vai ler
 	}
 	if (ac > 6)
 	{
@@ -244,13 +226,17 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 		all->pipe_nmb = ac - 5 - all->append;
 	}
 	if (all->append == 1 && ac == 6)
-		all->cmds = proc_cmds(av, 3, 4); //unica situcação q se usa normie
+		all->cmds = proc_cmds(all, av, 2); //unica situcação q se usa normie
 	else
-		all->cmds = proc_multi_cmds(ac, av, flag); //flag para ver se é append ou nao
+		all->cmds = proc_cmds(all, av, 2); //flag para ver se é append ou nao
 	return (all);
 }
 
 /*
+flag undeclared
+here doc nao se pode comparar a pointer
+proc_multi_cmds(all, av, 2);
+t_cmd	*proc_cmds(t_all *all, char **av, int index);
 para além disso, ainda tenho que testar a nova improved
 proc cmds, que serve tanto para normie como para bonus
 
@@ -307,6 +293,36 @@ funcoes diferentes so porque muda o av[2] para av[3];
 multi pipes - 5 args ou mais
 append - 5 args
 */
+
+/////////////////////////////
+
+/*
+t_all	*weird_all(t_all *all, int ac, char **av)
+{
+	all->file1 = av[1];
+	all->file2 = av[ac - 1];
+	all->append = 0;
+	all->pipe_nmb = 0;
+	all->multi = 0;
+	all->input = -1;
+	if (av[1] == "here_doc")
+	{
+		all->append = 1;
+		all->file1 = proc_delim(av[2]);
+	}
+	if (ac > 6)
+	{
+		all->multi = 1;
+		all->pipe_nmb = ac - 5 - all->append;
+	}
+	if (all->append == 1 && ac == 6)
+		all->cmds = proc_cmds(av, 3, 4); //unica situcação q se usa normie
+	else
+		all->cmds = proc_multi_cmds(ac, av, flag); //flag para ver se é append ou nao
+	return(all);
+}*/
+
+/////////////////////////////
 
 /*
 t_all	*proc_heredoc(char **av, t_bflags *flags)

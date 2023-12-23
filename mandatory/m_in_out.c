@@ -36,7 +36,9 @@ void	first_cmd(t_all *all, int in)
 	//if (pipe(fd) == -1)
 		//man_error(1, p1, all);
 	ft_printf("inside first command, fd: %d\n", in);
+	ft_printf("error here?\n");
 	pid = fork();
+	ft_printf("or maybe here?\n");
 	//if (pid == -1)
 		//man_error(2, p1, all);
 	if (pid == 0)

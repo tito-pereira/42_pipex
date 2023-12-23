@@ -15,8 +15,16 @@
 
 # include "../mandatory/pipex.h"
 
-// proc bonus
-// multi
+t_all	*proc_central(t_all *all, int ac, char **av);
 void	mult_pipes(t_all *all);
 
 #endif
+
+// proc all, mult pipes
+/*
+provavelmente tenho que refazer a main porque ficou toda mal
+a distinção do numero de argumentos eu já faço no proc bonus
+o resto tmb, incluindo o multi pipes
+
+apenas usar o proc central em vez de proc cmds ou isso
+*/

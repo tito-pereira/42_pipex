@@ -100,14 +100,26 @@ depois ainda falta
 
 testing
 
-este erro estava a deixar me irritado c razao, porque nao faz
-sentido, a sintaxe tava bem
+- testar os bonus
+- valgrind e testar leaks
+(provavelmente tenho de fazer funcoes de free e erros)
 
-pipes estavam bem, comando estava bem, nada de pointers
-era problema daquela merda do proc
-pipe V
-comando V
-acho que ta feito
+ora bem, onde é que eu estava
+proc cmds, ou seja, testar normie sem bonus
+erro de makefile no m_proc
+erro no first command..
+talvez a proc cmds fez o array mal? file descriptors nao me parece muito
+porque eu não trato dos file descriptors naquela função
+porque eu não trato dos file descriptors naquela função
+porque eu não trato dos file descriptors naquela função
+holy fucking shit, did my algorithm just work??
+
+open e closes, fd, pipes (casa)
+valgrind (casa)
+norminette (casa e 42)
+pipex tester? (42)
+
+
 
 ->->-> usar este quickfix para resolver o problema do comando mau primeiro
 e depois sim resolver isto e usar o pipe etc

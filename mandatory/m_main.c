@@ -23,16 +23,16 @@ int	main(int ac, char **av)
 	{
 		//ft_printf("im in\n");
 		all = proc_all(av);
-		ft_printf("--- STRUCT ALL CREATED ---\n");
+		//ft_printf("--- STRUCT ALL CREATED ---\n");
 		in = open(all->file1, O_RDONLY);
-		ft_printf("file1 fd: %d\n", in);
+		//ft_printf("file1 fd: %d\n", in);
 		first_cmd(all, in);
-		ft_printf("--- FIRST COMMAND ---\n");
-		ft_printf("carryover fd: %d\n", all->input);
+		//ft_printf("--- FIRST COMMAND ---\n");
+		//ft_printf("carryover fd: %d\n", all->input);
 		//if (all->append == 1 || all->multi == 1)
 			//mult_pipes(all, &p1);
 		last_cmd(all);
-		ft_printf("--- LAST COMMAND ---\n");
+		//ft_printf("--- LAST COMMAND ---\n");
 		//free_all(all);
 	}
 	else

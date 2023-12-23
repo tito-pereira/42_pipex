@@ -44,7 +44,8 @@ typedef struct s_all {
 // free, errors
 void	free_all(t_all *all);
 // proc mandatory
-t_cmd	*proc_cmds(char **av, int index_a, int index_b);
+//t_cmd	*proc_cmds(char **av, int index_a, int index_b);
+t_cmd	*proc_cmds(t_all *all, char **av, int index);
 t_all	*proc_all(char **av);
 // first, last
 void	first_cmd(t_all *all, int in);
