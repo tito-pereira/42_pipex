@@ -17,6 +17,7 @@ int		main(int ac, char **av)
 	int 	in;
 	t_all 	*all;
 
+	all = NULL;
 	if (ac >= 5)
 	{
 		all = proc_central(all, ac, av);

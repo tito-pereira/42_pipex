@@ -14,9 +14,9 @@ NAME= pipex
 CC= cc
 CFLAGS= -Wall -Wextra -Werror
 RM= rm -rf
-SRC= ./mandatory/m_free.c ./mandatory/m_in_out.c ./mandatory/m_error.c
-MAN= ./mandatory/m_main.c \
+SRC= ./mandatory/m_free.c ./mandatory/m_in_out.c ./mandatory/m_error.c \
 	./mandatory/m_proc.c
+MAN= ./mandatory/m_main.c
 BON= ./extra/main_bonus.c \
 	./extra/proc_bonus.c ./extra/multi_bonus.c
 S_OBJ= ${SRC:.c=.o}

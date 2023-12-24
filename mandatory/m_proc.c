@@ -148,7 +148,7 @@ char	*proc_which(char *arr_zero)
 	if (pid == -1)
 		perror("error on fork\n");
 	if (pid == 0)
-		exec_which(pid, fd, tmp);
+		exec_which(fd, tmp);
 	wait(NULL);
 	//printf("parent pid: %d, fd[0]: %d\n", pid, fd[0]);
 	free(tmp); //melhorar este free, char ** nao e char *
@@ -159,6 +159,12 @@ char	*proc_which(char *arr_zero)
 	//ft_printf("final arr[0]:%s.\n", total);
 	return(total);
 }
+
+/*tirar o PID daqui porque nao é declarado
+nem esta presente no header file
+funcao exec which é assim:
+void	exec_which(int *fd, char **tmp)
+*/
 
 // --- criar estrutura all e derivados --- //
 

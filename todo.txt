@@ -104,15 +104,8 @@ testing
 - valgrind e testar leaks
 (provavelmente tenho de fazer funcoes de free e erros)
 
-ora bem, onde é que eu estava
-proc cmds, ou seja, testar normie sem bonus
-erro de makefile no m_proc
-erro no first command..
-talvez a proc cmds fez o array mal? file descriptors nao me parece muito
-porque eu não trato dos file descriptors naquela função
-porque eu não trato dos file descriptors naquela função
-porque eu não trato dos file descriptors naquela função
-holy fucking shit, did my algorithm just work??
+raio do bonus nao esta a compilar um programa
+compila mas nao se cria nenhum executavel pipex
 
 open e closes, fd, pipes (casa)
 valgrind (casa)

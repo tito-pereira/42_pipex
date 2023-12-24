@@ -16,7 +16,7 @@ void	print_ar(char **arr) {
 	int	i = 0;
 	while (arr[i] != NULL)
 		i++;
-	ft_printf("---------------\nthe array has %d elements\n", i);
+	//ft_printf("---------------\nthe array has %d elements\n", i);
 	int	j = 0;
 	while (j <= i) {
 		ft_printf("arr[%d]:%s\n", j, arr[j]);
