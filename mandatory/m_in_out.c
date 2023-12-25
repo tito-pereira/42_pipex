@@ -36,18 +36,25 @@ void	first_cmd(t_all *all, int in)
 	//if (pipe(fd) == -1)
 		//man_error(1, p1, all);
 	ft_printf("inside first command, fd: %d\n", in);
-	ft_printf("error here?\n");
+	//ft_printf("error here?\n");
 	pid = fork();
-	ft_printf("or maybe here?\n");
+	//ft_printf("or maybe here?\n");
 	//if (pid == -1)
 		//man_error(2, p1, all);
 	if (pid == 0)
 	{
+		ft_printf("doing my exec on a forked program\nin: %d\n", in);
 		dup2(in, STDIN_FILENO); //file de input, acho que fecha automatico
-		dup2(fd[1], STDOUT_FILENO); //output é o pipe de escrita
+		ft_printf("1\nfd[1]; %d\n", fd[1]);
+		dup2(fd[1], STDOUT_FILENO); //output é o pipe de escrita, erro aqui why??
+		ft_printf("2\n");
 		close(in); //fecha a leitura, aqui vai ser só escrever para o pipe
+		ft_printf("3\n");
 		close(fd[1]); //ja dupliquei entao fecho
+		ft_printf("just print something i am trying to test this\n");
+		ft_printf("4\n");
 		execve(all->cmds->arr[0], all->cmds->arr, ENV_VAR);
+		ft_printf("5\n");
 	}
 	wait(NULL);
 	close(fd[1]);

@@ -104,9 +104,8 @@ testing
 - valgrind e testar leaks
 (provavelmente tenho de fazer funcoes de free e erros)
 
-raio do bonus nao esta a compilar um programa
-compila mas nao se cria nenhum executavel pipex
-ja parece compilar o pipex com bonus, agora testar
+o primeiro pipe bonus parece funcionar
+agora falta testar os multi pipes
 
 open e closes, fd, pipes (casa)
 valgrind (casa)

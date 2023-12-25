@@ -193,7 +193,7 @@ t_all	*init_all(t_all *all, int ac, char **av)
 	all->file1 = av[1];
 	all->file2 = av[ac - 1];
 	all->append = 0;
-	all->pipe_nmb = 0;
+	all->pipe_nmb = 1;
 	all->multi = 0;
 	all->input = -1;
 	all->cmds = NULL;
