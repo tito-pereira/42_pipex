@@ -106,6 +106,7 @@ testing
 
 raio do bonus nao esta a compilar um programa
 compila mas nao se cria nenhum executavel pipex
+ja parece compilar o pipex com bonus, agora testar
 
 open e closes, fd, pipes (casa)
 valgrind (casa)

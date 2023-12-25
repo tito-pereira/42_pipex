@@ -31,10 +31,6 @@ $(NAME): $(S_OBJ) ${M_OBJ}
 
 all: $(NAME)
 
-bonus:	$(S_OBJ) $(B_OBJ)
-	make -C ./libft
-	$(CC) $(CFLAGS) $(S_OBJ) $(B_OBJ) $(LFT) -o $(NAME)
-
 clean:
 	cd ./libft && make clean
 	$(RM) $(S_OBJ) $(M_OBJ) $(B_OBJ)
@@ -45,3 +41,7 @@ fclean: clean
 
 re: fclean all
 	cd ./libft && make re
+
+bonus:	fclean $(S_OBJ) $(B_OBJ)
+	make -C ./libft
+	$(CC) $(CFLAGS) $(S_OBJ) $(B_OBJ) $(LFT) -o $(NAME)
