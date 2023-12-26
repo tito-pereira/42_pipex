@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:22:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/26 16:03:49 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:33:27 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,9 @@ int		main(int ac, char **av)
 }
 
 /*
-nao entra no loop porque o pipe nmb fica a zeros
-
-o problema nao e da funcao open porque funciona no normie
-e faz truncate
-o problema e algo do bonus mesmo
-o numero de pipes e correto
-o numero de loops e correto
-talvez a funcao que seja errada
-ou o proc cmds
+acho que nao se le 1 a 1 do terminal
+tenho que escrever tudo duma vez e ler depois,
+coloco tipo 1000 bytes e feito
 
 proc cmds ta bem
 e algo na first cmd

@@ -100,17 +100,10 @@ depois ainda falta
 
 testing
 
-- testar os bonus
-- valgrind e testar leaks
-(provavelmente tenho de fazer funcoes de free e erros)
-
-o primeiro pipe bonus parece funcionar
-agora falta testar os multi pipes
-
-ah ok ok
-tenho que fazer multi pipes, por a correr bem, e amanha norminette,
-francinette, e entregar
-testar "here_doc"
+testar o append e here_doc
+o resto honestamente parece estar tudo
+mal isto fique a dar, e so preencher a papelada
+norm, valgrinds, testers, etc
 
 open e closes, fd, pipes (casa)
 valgrind (casa)

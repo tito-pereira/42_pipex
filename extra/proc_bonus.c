@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/26 16:02:30 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 17:09:35 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,23 +120,33 @@ char	*ft_str_find(char *str, char *lim)
 
 	i = 0;
 	j = 0;
+	ft_printf("lets find the string\nraw:%s\nlim:%s\n", str, lim);
 	while (str[i] != '\0')
 	{
 		j = 0;
 		while (str[i + j] == lim[j])
 		{
+			ft_printf("its a match\n");
 			if (lim[j] == '\0')
 			{
+				ft_printf("return conditions\n");
 				ret = ft_substr(str, 0, i);
 				free (str);
 				return (ret);
 			}
 			j++;
 		}
+		ft_printf("loop no %d\n", i);
 		i++;
 	}
 	return (NULL);
 }
+
+/*
+nao entra nas return conditions
+porque o while nao bate certo
+tenho que por o if depois do contador de j++,
+senao sai do while sem fazer a condicao de retorno
 
 char	*proc_delim(char *lim)
 {
@@ -147,8 +157,10 @@ char	*proc_delim(char *lim)
 
 	r = 1;
 	total = NULL;
+	ft_printf("inside reading function\n");
 	while (r > 0)
 	{
+		ft_printf("loop\n");
 		chest = ft_strdup(total);
 		shovel = malloc(2 * sizeof(char));
 		r = read(STDIN_FILENO, shovel, 1);
@@ -161,7 +173,21 @@ char	*proc_delim(char *lim)
 			return (ft_str_find(total, lim));
 	}
 	return (NULL);
+}*/
+
+char	*proc_delim(char *lim)
+{
+	char	*chest;
+
+	chest = malloc(1000 * sizeof(char));
+	read(STDIN_FILENO, chest, 1000);
+	if (ft_str_find(chest, lim) != NULL)
+		return (ft_str_find(chest, lim));
+	free (chest);
+	return (NULL);
 }
+//dar free do chest na strfind
+//ta a retornar NULL
 
 /*
 t_cmd	*proc_cmds(char **av, int index)
@@ -202,6 +228,7 @@ t_all	*init_all(t_all *all, int ac, char **av)
 
 int		comp_here_doc(char *av)
 {
+	//ft_printf("entered the here_doc comparer\n");
 	if (ft_strlen(av) == 8)
 	{
 		if (av[0] == 'h' && av[1] == 'e' && av[2] == 'r' && av[3] == 'e'
@@ -217,6 +244,7 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 	all = init_all(all, ac, av);
 	if (comp_here_doc(av[1]) == 1) //com append
 	{
+		//ft_printf("will change to append mode\n");
 		all->append = 1;
 		all->file1 = proc_delim(av[2]); //esta função vai ler
 	}
@@ -224,12 +252,14 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 	{
 		all->multi = 1;
 		all->pipe_nmb = ac - 5 - all->append;
-		ft_printf("pipe_nmb: %d\n", all->pipe_nmb);
 	}
-	if (all->append == 1 && ac == 6)
-		all->cmds = proc_cmds(all, av, 2); //unica situcação q se usa normie
+	ft_printf("input: %s\n", all->file1);
+	ft_printf("pipe_nmb: %d\n", all->pipe_nmb);
+	if (all->append == 1)// && ac == 6)
+		all->cmds = proc_cmds(all, av, 3);
 	else
-		all->cmds = proc_cmds(all, av, 2); //flag para ver se é append ou nao
+		all->cmds = proc_cmds(all, av, 2);
+	//all->cmds = proc_cmds(all, av, 2); for all
 	return (all);
 }
 
@@ -303,67 +333,5 @@ multi pipes - 5 args ou mais
 append - 5 args
 */
 
-/////////////////////////////
-
-/*
-t_all	*weird_all(t_all *all, int ac, char **av)
-{
-	all->file1 = av[1];
-	all->file2 = av[ac - 1];
-	all->append = 0;
-	all->pipe_nmb = 0;
-	all->multi = 0;
-	all->input = -1;
-	if (av[1] == "here_doc")
-	{
-		all->append = 1;
-		all->file1 = proc_delim(av[2]);
-	}
-	if (ac > 6)
-	{
-		all->multi = 1;
-		all->pipe_nmb = ac - 5 - all->append;
-	}
-	if (all->append == 1 && ac == 6)
-		all->cmds = proc_cmds(av, 3, 4); //unica situcação q se usa normie
-	else
-		all->cmds = proc_multi_cmds(ac, av, flag); //flag para ver se é append ou nao
-	return(all);
-}*/
 
 /////////////////////////////
-
-/*
-t_all	*proc_heredoc(char **av, t_bflags *flags)
-{
-	t_all	*all;
-
-	all = malloc(sizeof(t_all));
-	all->file1 = proc_delim();
-	all->file2 = ???; //depende?
-	all->pipe_nmb = ???; //mandatory, é logo 0
-	all->append = 1; //mandatory, é logo 0
-	all->multi = ???; //mandatory, é logo 0
-	all->input = -1; //usado mais à frente
-	//all->cmds = proc_cmds(av);
-	return(all);
-}
-
-t_all	*proc_all_bonus(char **av, t_bflags *flags)
-{
-	t_all	*all;
-
-	all = malloc(sizeof(t_all));
-	if (flags->heredoc == 1)
-		all->file1 = proc_delim();
-	else
-		all->file1 = flags->ind_a;
-	all->file2 = flags->ind_b;
-	all->pipe_nmb = flags->nmb; //mandatory, é logo 0
-	all->append = flags->append; //mandatory, é logo 0
-	all->multi = flags->multi; //mandatory, é logo 0
-	all->input = -1; //usado mais à frente
-	//all->cmds = proc_cmds(av);
-	return(all);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 10:44:26 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/04/26 09:21:18 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:30:30 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(char *src)
 	int		i;
 
 	i = 0;
+	if (src == NULL)
+		return (NULL);
 	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
 	if (!dest)
 		return (NULL);
