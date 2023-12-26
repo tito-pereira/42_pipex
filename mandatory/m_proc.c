@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 16:23:25 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:00:43 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,10 +234,11 @@ t_cmd	*proc_cmds(t_all *all, char **av, int index)
 {
 	t_cmd	*new;
 	t_cmd	*begin;
+	int		i;
 
 	new = malloc(sizeof(t_cmd));
 	new->arr = ft_split(av[index], ' '); //primeiro set de comandos na char **
-	//ft_printf("INDEX: %d\n", index);
+	ft_printf("PROC CMDS\n");
 	//print_arr(new->arr);
 	new->arr = new_arr(new->arr); //acrescenta o NULL no fim
 	//ft_printf("INDEX: %d\n", index);
@@ -246,9 +247,11 @@ t_cmd	*proc_cmds(t_all *all, char **av, int index)
 	//ft_printf("INDEX: %d\n", index);
 	//print_arr(new->arr);
 	begin = new;
+	print_arr(new->arr);
 	//ft_printf("PIPE NMB: %d\n", all->pipe_nmb);
 	//ft_printf("----- OTHER COMMANDS -----\n");
-	while (all->pipe_nmb > 0)
+	i = all->pipe_nmb;
+	while (i >= 0)
 	{
 		index++;
 		new->next = malloc(sizeof(t_cmd)); //new atualmente == NULL, por isso, dar novo malloc
@@ -258,8 +261,8 @@ t_cmd	*proc_cmds(t_all *all, char **av, int index)
 		new->arr[0] = proc_which(new->arr[0]); //muda o primeiro elemento para PATH
 		new->next = NULL;
 		//ft_printf("INDEX: %d\n", index);
-		//print_arr(new->arr);
-		all->pipe_nmb--;
+		print_arr(new->arr);
+		i--;
 	}
 	return(begin);
 }
@@ -286,7 +289,7 @@ t_all	*proc_all(char **av)
 	all->file1 = av[1];
 	all->file2 = av[4];
 	//ft_printf("file1: %s\nfile2: %s;\n", all->file1, all->file2);
-	all->pipe_nmb = 1;
+	all->pipe_nmb = 0;
 	all->append = 0; //mandatory, é logo 0
 	all->multi = 0; //mandatory, é logo 0
 	all->input = -1; //usado mais à frente

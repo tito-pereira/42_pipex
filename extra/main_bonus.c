@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:22:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 16:00:27 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:03:49 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,38 @@ int		main(int ac, char **av)
 		all = proc_central(all, ac, av);
 		in = open(all->file1, O_RDONLY);
 		first_cmd(all, in);
-		/*
-		MULTI PIPES:
-		while (all->pipe_nmb > 0) {
+		ft_printf("i am using the bonus main\npipe nmb = %d\n", all->pipe_nmb);
+		while (all->pipe_nmb > 0)
+		{
+			ft_printf("loop\n");
 			first_cmd(all, all->input);
 			all->pipe_nmb--;
 		}
-		*/
 		last_cmd(all);
 	}
 	else
 		ft_printf("Number of files and commands is wrong\n");
 	return(0);
 }
+
+/*
+nao entra no loop porque o pipe nmb fica a zeros
+
+o problema nao e da funcao open porque funciona no normie
+e faz truncate
+o problema e algo do bonus mesmo
+o numero de pipes e correto
+o numero de loops e correto
+talvez a funcao que seja errada
+ou o proc cmds
+
+proc cmds ta bem
+e algo na first cmd
+ja sei, a first cmd nao deve suportar multiplos files
+tava a fazer um pipe a mais, entrava no last cmd c cmd NULL
+nao sei porque quis decidir ter o normie como pipe 1
+voltei a por tudo a zeros e funcionou
+*/
 
 /*
 multi pipes, tenho que ver qual o file descriptor que tem que
@@ -57,32 +76,6 @@ input, usando o all->input
 - passa para o all->cmds->next 
 
 depois no fim ver a questão do close repetido e falta de close no forked
-
-void	first_cmd(t_all *all, int in)
-{
-	int	*fd;
-	int	pid;
-
-	fd = malloc(2 * sizeof(int));
-	pipe(fd);
-	pid = fork();
-	if (pid == 0)
-	{
-		// close (fd[0]); ??? //fecha a reading e assume este processo como writing do pipe
-		dup2(in, STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		close(in);
-		close(fd[1]);
-		execve(all->cmds->arr[0], all->cmds->arr, ENV_VAR);
-	}
-	wait(NULL);
-	close (fd[1]); //fecha a writing e assume este processo como reading do pipe
-	all->cmds = all->cmds->next;
-	all->input = fd[0];
-	close (in); //fecha o file1
-	close (fd[1]); //repetido??
-	free(fd);
-}
 
 void	last_cmd(t_all *all)
 {

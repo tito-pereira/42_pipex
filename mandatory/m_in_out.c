@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:16 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 15:19:26 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 15:50:39 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,37 +35,32 @@ void	first_cmd(t_all *all, int in)
 	pipe(fd);
 	//if (pipe(fd) == -1)
 		//man_error(1, p1, all);
-	ft_printf("inside first command, fd: %d\n", in);
-	//ft_printf("error here?\n");
+	//ft_printf("inside first command, fd: %d\n", in);
 	pid = fork();
-	//ft_printf("or maybe here?\n");
 	//if (pid == -1)
 		//man_error(2, p1, all);
 	if (pid == 0)
 	{
-		ft_printf("doing my exec on a forked program\nin: %d\n", in);
-		dup2(in, STDIN_FILENO); //file de input, acho que fecha automatico
-		ft_printf("1\nfd[1]; %d\n", fd[1]);
-		dup2(fd[1], STDOUT_FILENO); //output é o pipe de escrita, erro aqui why??
-		ft_printf("2\n");
-		close(in); //fecha a leitura, aqui vai ser só escrever para o pipe
-		ft_printf("3\n");
-		close(fd[1]); //ja dupliquei entao fecho
-		ft_printf("just print something i am trying to test this\n");
-		ft_printf("4\n");
+		close (fd[0]); //
+		dup2(in, STDIN_FILENO);
+		dup2(fd[1], STDOUT_FILENO);
+		close(in);
+		close(fd[1]);
 		execve(all->cmds->arr[0], all->cmds->arr, ENV_VAR);
-		ft_printf("5\n");
 	}
 	wait(NULL);
-	close(fd[1]);
+	close (fd[1]);
+	ft_printf("--------------\ncurrent command:\n");
+	print_ar(all->cmds->arr);
 	all->cmds = all->cmds->next; //passa para o ultimo/proximo cmds
+	//ft_printf("next command:\n");
 	//print_ar(all->cmds->arr);
-	ft_printf("arr[0]: %s\n", all->cmds->arr[0]);
+	//ft_printf("arr[0]: %s\n", all->cmds->arr[0]);
 	all->input = fd[0]; //vai dar carry over de leitura para outro sitio
 	close (in);
-	close (fd[1]);
-	ft_printf("final reading fd: %d\n", fd[0]);
-	free(fd); //NAO POSSO, ou posso? afinal sim
+	//close (fd[1]); //repetido
+	//ft_printf("final reading fd: %d\n", fd[0]);
+	free(fd);
 }
 
 void	last_cmd(t_all *all)
@@ -75,13 +70,13 @@ void	last_cmd(t_all *all)
 
 	out = 0;
 	//all->input = open("half.txt", O_RDWR | O_CREAT, 0777);
-	ft_printf("inside last cmd, input fd:%d\n", all->input);
+	//ft_printf("inside last cmd, input fd:%d\n", all->input);
 	if (all->append == 0) {
-		ft_printf("%s is getting reset\n", all->file2);
+		//ft_printf("%s is getting reset\n", all->file2);
 		out = open(all->file2, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	}
 	else if (all->append == 1) {
-		ft_printf("%s will append\n", all->file2);
+		//ft_printf("%s will append\n", all->file2);
 		out = open(all->file2, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	}
 	if (out == -1) {
@@ -89,7 +84,7 @@ void	last_cmd(t_all *all)
 		//exit(EXIT_FAILURE);
 	}
 	//print_ar(all->cmds->arr);
-	ft_printf("arr[0]:%s; out fd:%d\n", all->cmds->arr[0], out);
+	//ft_printf("arr[0]:%s; out fd:%d\n", all->cmds->arr[0], out);
 	pid = fork();
 	if (pid == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 16:49:26 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:02:30 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ t_all	*init_all(t_all *all, int ac, char **av)
 	all->file1 = av[1];
 	all->file2 = av[ac - 1];
 	all->append = 0;
-	all->pipe_nmb = 1;
+	all->pipe_nmb = 0;
 	all->multi = 0;
 	all->input = -1;
 	all->cmds = NULL;
@@ -224,6 +224,7 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 	{
 		all->multi = 1;
 		all->pipe_nmb = ac - 5 - all->append;
+		ft_printf("pipe_nmb: %d\n", all->pipe_nmb);
 	}
 	if (all->append == 1 && ac == 6)
 		all->cmds = proc_cmds(all, av, 2); //unica situcação q se usa normie
@@ -231,6 +232,14 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 		all->cmds = proc_cmds(all, av, 2); //flag para ver se é append ou nao
 	return (all);
 }
+
+//pipe_nmb ta a ficar um short e nao faz o ultimo comando
+/*
+tinha -5 meti -4 agora
+titulo, file1, comando 1 sem pipe, file2 - 4, nao 5
+so e 5 se houver heredoc
+titulo, heredoc, limiter, etc
+*/
 
 /*
 flag undeclared
