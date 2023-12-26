@@ -23,7 +23,13 @@ int		main(int ac, char **av)
 		all = proc_central(all, ac, av);
 		in = open(all->file1, O_RDONLY);
 		first_cmd(all, in);
-		//multi pipes
+		/*
+		MULTI PIPES:
+		while (all->pipe_nmb > 0) {
+			first_cmd(all, all->input);
+			all->pipe_nmb--;
+		}
+		*/
 		last_cmd(all);
 	}
 	else
@@ -38,12 +44,19 @@ while (all->pipe_nmb > 0) {
 	all->pipe_nmb--;
 }
 
-agora a questão é, proc all ou proc central?
-e o all leva malloc dentro da proc central?
-ah ya falta fazer agora multiplos pipes
-first
-multi pipes
-last
+o importante é o all->input, que representa o file descriptor
+que vai servir de input do last command/pipe na reading end
+portanto, basear no last comman mas tenho que deixar a reading end [0]?
+do output aberta
+
+tenho que confirmar amanha, mas parece me que vou até usar
+repetida a "first cmd" function e vou alterando o int in de ficheiro de
+input, usando o all->input
+- gere bem os file descriptors
+- gere bem pipes e forks
+- passa para o all->cmds->next 
+
+depois no fim ver a questão do close repetido e falta de close no forked
 
 void	first_cmd(t_all *all, int in)
 {
@@ -55,22 +68,19 @@ void	first_cmd(t_all *all, int in)
 	pid = fork();
 	if (pid == 0)
 	{
+		// close (fd[0]); ??? //fecha a reading e assume este processo como writing do pipe
 		dup2(in, STDIN_FILENO);
 		dup2(fd[1], STDOUT_FILENO);
-		close(in); //fecha a leitura, aqui vai ser só escrever para o pipe
-		ft_printf("3\n");
-		close(fd[1]); //ja dupliquei entao fecho
-		ft_printf("just print something i am trying to test this\n");
-		ft_printf("4\n");
+		close(in);
+		close(fd[1]);
 		execve(all->cmds->arr[0], all->cmds->arr, ENV_VAR);
-		ft_printf("5\n");
 	}
 	wait(NULL);
-	close(fd[1]);
+	close (fd[1]); //fecha a writing e assume este processo como reading do pipe
 	all->cmds = all->cmds->next;
 	all->input = fd[0];
-	close (in);
-	close (fd[1]);
+	close (in); //fecha o file1
+	close (fd[1]); //repetido??
 	free(fd);
 }
 

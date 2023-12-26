@@ -107,6 +107,11 @@ testing
 o primeiro pipe bonus parece funcionar
 agora falta testar os multi pipes
 
+ah ok ok
+tenho que fazer multi pipes, por a correr bem, e amanha norminette,
+francinette, e entregar
+testar "here_doc"
+
 open e closes, fd, pipes (casa)
 valgrind (casa)
 norminette (casa e 42)
