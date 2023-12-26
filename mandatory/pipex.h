@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:31:19 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/06 16:24:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:00:38 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h> //open
-# include <limits.h> //acho que nao preciso?
-# include "../libft/mylib.h" //usar no read
+# include "../libft/mylib.h"
 
 # define LIMITER    "LIM"
 # define ENV_VAR    __environ
-# define PATH       __environ[32] //nao estou a usar isto
 
 typedef struct s_cmd {
-	char	**arr;
+	char			**arr;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -44,16 +42,11 @@ typedef struct s_all {
 // free, errors
 void	free_all(t_all *all);
 // proc mandatory
-//t_cmd	*proc_cmds(char **av, int index_a, int index_b);
 t_cmd	*proc_cmds(t_all *all, char **av, int index);
 t_all	*proc_all(char **av);
-// first, last
+char	*proc_which(char *arr_zero);
+// first & last
 void	first_cmd(t_all *all, int in);
 void	last_cmd(t_all *all);
 
 #endif
-
-	//char	*cmd; //so e usado para o which
-	//char	*wch; //passo intermedio de formar o path
-	//char	*path; //posso usar apenas arr[0]
-	//char	**flag;
