@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:47:05 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/05/23 17:44:19 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/26 18:04:15 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	c_valid_min_w(char *str, int *j)
 	while (str[i] == ' ' || str[i] == '+' || str[i] == '#' || str[i] == '0'
 		|| str[i] == '.' || str[i] == '-'
 		|| (str[i] >= '1' && str[i] <= '9'))
-			i++;
+		i++;
 	if (see_if_spec(str[i]) == 1)
 	{
 		i--;
@@ -40,7 +40,7 @@ int	c_valid_point(char *str, int *j)
 	while (str[i] == ' ' || str[i] == '+' || str[i] == '#' || str[i] == '0'
 		|| str[i] == '.' || str[i] == '-'
 		|| (str[i] >= '1' && str[i] <= '9'))
-			i++;
+		i++;
 	if (see_if_spec(str[i]) == 1)
 	{
 		i--;
@@ -60,7 +60,7 @@ int	c_valid_mw_point(char *str, int *j)
 	while (str[i] == ' ' || str[i] == '+' || str[i] == '#' || str[i] == '0'
 		|| str[i] == '.' || str[i] == '-'
 		|| (str[i] >= '1' && str[i] <= '9'))
-			i++;
+		i++;
 	if (see_if_spec(str[i]) == 1)
 	{
 		i--;

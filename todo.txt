@@ -100,10 +100,13 @@ depois ainda falta
 
 testing
 
-testar o append e here_doc
-o resto honestamente parece estar tudo
-mal isto fique a dar, e so preencher a papelada
-norm, valgrinds, testers, etc
+. aquela questao do proc delim
+criar if = 1
+return isso
+ou return null em erro, senao pode dar azo a varios erros
+. ver valgrinds para erros normie e bonus
+. norm
+. passar tester (francinette)
 
 open e closes, fd, pipes (casa)
 valgrind (casa)
