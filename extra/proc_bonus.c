@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 17:40:29 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 18:21:14 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_str_find(char *str, char *lim)
 		}
 		i++;
 	}
+	free (str);
 	return (NULL);
 }
 
@@ -44,8 +45,6 @@ char	*proc_delim(char *lim)
 
 	chest = malloc(1000 * sizeof(char));
 	read (STDIN_FILENO, chest, 1000);
-	if (chest == NULL)
-		return (NULL);
 	return (ft_str_find(chest, lim));
 }
 
@@ -99,6 +98,13 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 }
 
 /*
+problemas de free c o chest
+caso de NULL, leva free antes de return NULL
+caso nao de NULL, leva free antes da substr
+caso de certo, o ret precisa de levar NULL
+depois
+
+
 if all->file1 == NULL, condicao de erro
 
 free_h_all

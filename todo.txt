@@ -131,13 +131,27 @@ exec: .c=.o, compile exec
 
 --- valgrind e fugas e frees ---
 
-so falta testar valgrind do bonus
-vou so acabar o valgrind, provavelmente nem ponho erros e
-entrego ja amanha, senao meto os erros amanha
-nem sao so os leaks, o output tmb ta mal, ta a saltar o ultimo
-pipe outra vez
+outputs parecem funcionar bem
+vamos ver valgrinds
 
-e ver se coloco erros ou nao
+append
+sem leaks
+mas um erro
+conditional jump on uninitialized values
 
-os bonus funcionam bem,
-o append sem um LIM correto e que funciona mal
+criado em central, proc delim, malloc (chest)
+error move em central, delim, strfind
+
+honestamente nao vejo qual o erro
+eu dou free no chest corretamente
+
+==174213== Conditional jump or move depends on uninitialised value(s)
+==174213==    at 0x4019ED: ft_str_find (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
+==174213==    by 0x401AD6: proc_delim (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
+==174213==    by 0x401CA2: proc_central (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
+==174213==    by 0x401937: main (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
+==174213==  Uninitialised value was created by a heap allocation
+==174213==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==174213==    by 0x401AB5: proc_delim (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
+==174213==    by 0x401CA2: proc_central (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
+==174213==    by 0x401937: main (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
