@@ -18,8 +18,3 @@ To see if it works, just use:
 $ cat output_file.txt
 
 If the number 20 is displayed, the pipex program works.
-21
-22
-23
-24
-25 linhas agora

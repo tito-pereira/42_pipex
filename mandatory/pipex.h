@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:31:19 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 16:39:56 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:46:22 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_all {
 	t_cmd	*begin;
 }	t_all;
 
-// free, errors
+// free
 void	free_all(t_all *all);
 void	free_arr(char **arr);
 // proc mandatory

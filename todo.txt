@@ -130,3 +130,14 @@ biblio: .c=.o, compile .a
 exec: .c=.o, compile exec
 
 --- valgrind e fugas e frees ---
+
+so falta testar valgrind do bonus
+vou so acabar o valgrind, provavelmente nem ponho erros e
+entrego ja amanha, senao meto os erros amanha
+nem sao so os leaks, o output tmb ta mal, ta a saltar o ultimo
+pipe outra vez
+
+e ver se coloco erros ou nao
+
+os bonus funcionam bem,
+o append sem um LIM correto e que funciona mal

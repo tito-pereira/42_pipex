@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 13:12:44 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:40:29 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*proc_delim(char *lim)
 	char	*chest;
 
 	chest = malloc(1000 * sizeof(char));
-	chest = read(STDIN_FILENO, chest, 1000);
+	read (STDIN_FILENO, chest, 1000);
 	if (chest == NULL)
 		return (NULL);
 	return (ft_str_find(chest, lim));
@@ -58,6 +58,7 @@ t_all	*init_all(t_all *all, int ac, char **av)
 	all->multi = 0;
 	all->input = -1;
 	all->cmds = NULL;
+	all->begin = NULL;
 	return (all);
 }
 
@@ -80,15 +81,29 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 	{
 		all->append = 1;
 		all->file1 = proc_delim(av[2]);
+		if (all->file1 == NULL)
+		{
+			free (all);
+			exit (0);
+		}
 	}
 	if (ac > 6)
-	{
 		all->multi = 1;
-		all->pipe_nmb = ac - 5 - all->append;
-	}
+	all->pipe_nmb = ac - 5 - all->append;
 	if (all->append == 1)
 		all->cmds = proc_cmds(all, av, 3);
 	else
 		all->cmds = proc_cmds(all, av, 2);
+	all->begin = all->cmds;
 	return (all);
 }
+
+/*
+if all->file1 == NULL, condicao de erro
+
+free_h_all
+init all (so valores, sem pointers)
+
+free (all)
+nao faco proc cmds, nao preciso de free cmds
+*/
