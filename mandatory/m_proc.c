@@ -6,13 +6,11 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 15:28:49 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:36:43 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-// acrescenta NULL no fim de cada array (da free ao antigo)
 
 char	**new_arr(char **arr)
 {
@@ -31,7 +29,7 @@ char	**new_arr(char **arr)
 		j++;
 	}
 	new[i] = NULL;
-	free_arr (arr);
+	free (arr);
 	return (new);
 }
 
@@ -72,21 +70,7 @@ t_all	*proc_all(char **av)
 	all->append = 0;
 	all->multi = 0;
 	all->input = -1;
-	//free (all->cmds);
 	all->cmds = proc_cmds(all, av, 2);
 	all->begin = all->cmds;
 	return (all);
 }
-
-/*
-erros de condicoes de saida
-usar perror e isso
-
-proc all, malloc (t_all)
-proc which, read pipe, malloc (char **)
-proc cmds, malloc (t_cmd)
-proc cmds, new arr, malloc (char **)
-
-honestamente nao vonsigo perceber de onde vem estas
-leaks
-*/
