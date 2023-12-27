@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 13:56:10 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:28:30 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	free_arr(char **arr)
 		free (arr[i]);
 		i++;
 	}
-	free (arr[i]);
+	if (arr[i] == NULL)
+		free (arr[i]);
+	free (arr);
 }
 
 void	free_cmds(t_cmd *cmds)
@@ -35,6 +37,11 @@ void	free_cmds(t_cmd *cmds)
 		free_arr (tmp->arr);
 		cmds = cmds->next;
 		free (tmp);
+	}
+	if (cmds == NULL)
+	{
+		free_arr (cmds->arr);
+		free (cmds);
 	}
 }
 
@@ -65,4 +72,9 @@ typedef struct s_all {
 	int		input;
 	t_cmd	*cmds;
 }	t_all;
+
+4 mallocs que faltam
+2 splits (substrs) (arr antigo)
+1 new arr (null no fim?)
+1 direto do proc cmds (t_cmds)
 */

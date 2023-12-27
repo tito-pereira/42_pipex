@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 13:35:43 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:39:45 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**new_arr(char **arr)
 		j++;
 	}
 	new[i] = NULL;
-	free(arr);
+	free_arr (arr);
 	return (new);
 }
 
@@ -85,4 +85,9 @@ total do proc which = arr[0], basta dar free do array inteiro
 
 erros de condicoes de saida
 usar perror e isso
+
+proc all, malloc (t_all)
+proc which, read pipe, malloc (char **)
+proc cmds, malloc (t_cmd)
+proc cmds, new arr, malloc (char **)
 */

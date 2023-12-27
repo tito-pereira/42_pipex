@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:59:32 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 13:34:55 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:14:21 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*proc_which(char *arr_zero)
 	total = read_pipe(fd[0]);
 	close(fd[0]);
 	free(fd);
+	free (arr_zero);
 	return (total);
 }
 
