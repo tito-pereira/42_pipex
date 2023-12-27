@@ -130,12 +130,3 @@ biblio: .c=.o, compile .a
 exec: .c=.o, compile exec
 
 --- valgrind e fugas e frees ---
-
-17 allocs, 7 frees
-(322 bytes em 10 allocs missing)
-maior parte sao mallocs nos proc cmds, splits e substrs
-
-ja vi os frees no m_proc
-ver agr no in_out e no m_which
-in_out nao tem
-m_which encaixa no array no proc cmds, logo nao tem
