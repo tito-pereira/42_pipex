@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:31:19 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 14:03:08 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:15:32 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_all {
 	int		multi;
 	int		input;
 	t_cmd	*cmds;
+	t_cmd	*begin;
 }	t_all;
 
 // free, errors

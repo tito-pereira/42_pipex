@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 14:39:45 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:28:49 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,13 @@ t_all	*proc_all(char **av)
 	all->append = 0;
 	all->multi = 0;
 	all->input = -1;
+	//free (all->cmds);
 	all->cmds = proc_cmds(all, av, 2);
+	all->begin = all->cmds;
 	return (all);
 }
 
 /*
-malloc all
-malloc t cmds
-malloc do array com a split
-
-total do proc which = arr[0], basta dar free do array inteiro
-
 erros de condicoes de saida
 usar perror e isso
 
@@ -90,4 +86,7 @@ proc all, malloc (t_all)
 proc which, read pipe, malloc (char **)
 proc cmds, malloc (t_cmd)
 proc cmds, new arr, malloc (char **)
+
+honestamente nao vonsigo perceber de onde vem estas
+leaks
 */
