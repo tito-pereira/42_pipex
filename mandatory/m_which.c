@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:59:32 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/26 18:00:18 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:34:55 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,11 @@ char	*proc_which(char *arr_zero)
 	free(fd);
 	return (total);
 }
+
+/*
+ver se ha mallocs nao free neste file
+tmp e fd levam ambos free
+
+malloc do total no read pipe
+da malloc, le do pipe e armazena
+*/

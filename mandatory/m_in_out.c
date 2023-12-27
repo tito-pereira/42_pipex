@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:16 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/26 17:33:37 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:40:58 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,11 @@ void	last_cmd(t_all *all)
 	close (all->input);
 	close (out);
 }
+
+/*
+last cmd nao cria nenhum pipe:
+input - pipe ja foi criado e continua c a fd[0] aberta
+output - cria um ficheiro final, nao um pipe
+
+fd do first cmd leva malloc e free tmb
+*/

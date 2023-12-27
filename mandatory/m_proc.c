@@ -6,11 +6,13 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/26 18:00:13 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:35:43 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+// acrescenta NULL no fim de cada array (da free ao antigo)
 
 char	**new_arr(char **arr)
 {
@@ -73,3 +75,14 @@ t_all	*proc_all(char **av)
 	all->cmds = proc_cmds(all, av, 2);
 	return (all);
 }
+
+/*
+malloc all
+malloc t cmds
+malloc do array com a split
+
+total do proc which = arr[0], basta dar free do array inteiro
+
+erros de condicoes de saida
+usar perror e isso
+*/
