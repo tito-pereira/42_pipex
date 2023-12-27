@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 16:39:17 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:42:19 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_arr(char **arr)
 	int	i;
 
 	i = 0;
-	while(arr[i] != NULL)
+	while (arr[i] != NULL)
 	{
 		free (arr[i]);
 		i++;
@@ -28,7 +28,7 @@ void	free_arr(char **arr)
 void	free_cmds(t_cmd *cmds)
 {
 	t_cmd	*tmp;
-	
+
 	while (cmds != NULL)
 	{
 		tmp = cmds;
