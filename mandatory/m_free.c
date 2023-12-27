@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 16:42:19 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:43:28 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	free_cmds(t_cmd *cmds)
 void	free_all(t_all *all)
 {
 	free_cmds (all->begin);
+	free (all);
 }
