@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/26 18:11:35 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:12:44 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ char	*proc_delim(char *lim)
 	char	*chest;
 
 	chest = malloc(1000 * sizeof(char));
-	read(STDIN_FILENO, chest, 1000);
+	chest = read(STDIN_FILENO, chest, 1000);
+	if (chest == NULL)
+		return (NULL);
 	return (ft_str_find(chest, lim));
 }
 
