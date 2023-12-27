@@ -6,11 +6,45 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 13:42:06 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:56:10 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while(arr[i] != NULL)
+	{
+		free (arr[i]);
+		i++;
+	}
+	free (arr[i]);
+}
+
+void	free_cmds(t_cmd *cmds)
+{
+	t_cmd	*tmp;
+	
+	while (cmds != NULL)
+	{
+		tmp = cmds;
+		free_arr (tmp->arr);
+		cmds = cmds->next;
+		free (tmp);
+	}
+}
+
+void	free_all(t_all *all)
+{
+	free (all->file1);
+	free (all->file2);
+	free_cmds (all->cmds);
+	free (all);
+}
 
 /*
 free all

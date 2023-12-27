@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:34:00 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 13:28:08 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:57:30 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 		in = open(all->file1, O_RDONLY);
 		first_cmd(all, in);
 		last_cmd(all);
+		free_all (all);
 	}
 	else
 		ft_printf("Number of files and commands is wrong\n");

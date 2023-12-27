@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:22:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/26 18:10:54 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:57:46 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 			all->pipe_nmb--;
 		}
 		last_cmd(all);
+		free_all (all);
 	}
 	else
 		ft_printf("Number of files and commands is wrong\n");
