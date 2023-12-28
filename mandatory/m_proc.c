@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 17:11:50 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:24:20 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,3 @@ t_all	*proc_all(char **av)
 	all->begin = all->cmds;
 	return (all);
 }
-
-/*
-cat cat wc -l
-1 pipe, 6 mallocs
-2 pipes, 13 mallocs
-3 pipes, 16 mallocs
-
-proc cmds malloc dar fuga so pode ser por causa do pipe nmb
-porque o primeiro e segundo da normie ja n dao leak
-
-central, cmds, proc which, read pipe, malloc
-central, cmds, new arr, malloc
-central, cmds, malloc
-*/

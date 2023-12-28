@@ -6,19 +6,19 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:31:19 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 17:46:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:24:50 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h> //write, read, fork, exec
-# include <stdlib.h> //malloc, free
-# include <sys/wait.h> //wait, waitpid, getpid, getppid
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <fcntl.h> //open
+# include <fcntl.h>
 # include "../libft/mylib.h"
 
 # define LIMITER    "LIM"
@@ -40,14 +40,11 @@ typedef struct s_all {
 	t_cmd	*begin;
 }	t_all;
 
-// free
 void	free_all(t_all *all);
 void	free_arr(char **arr);
-// proc mandatory
 t_cmd	*proc_cmds(t_all *all, char **av, int index);
 t_all	*proc_all(char **av);
 char	*proc_which(char *arr_zero);
-// first & last
 void	first_cmd(t_all *all, int in);
 void	last_cmd(t_all *all);
 

@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:54 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 18:08:47 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:24:11 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,3 @@ void	free_all(t_all *all)
 	free_cmds (all->begin);
 	free (all);
 }
-
-/*
-o free file1 e por causa de ler do terminal
-faco um malloc extra
-se nao for aqui, e no proc cmds
-*/

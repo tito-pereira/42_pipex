@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/28 13:43:46 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:23:38 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,3 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 	all->begin = all->cmds;
 	return (all);
 }
-
-/*
-problemas de free c o chest
-caso de NULL, leva free antes de return NULL
-caso nao de NULL, leva free antes da substr
-caso de certo, o ret precisa de levar NULL
-depois
-
-
-if all->file1 == NULL, condicao de erro
-
-free_h_all
-init all (so valores, sem pointers)
-
-free (all)
-nao faco proc cmds, nao preciso de free cmds
-*/

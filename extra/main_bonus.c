@@ -6,11 +6,21 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:22:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 17:37:31 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:32:50 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+int	open_error(int in, t_all *all)
+{
+	if (in == -1)
+	{
+		free_all (all);
+		return (1);
+	}
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
@@ -22,6 +32,8 @@ int	main(int ac, char **av)
 	{
 		all = proc_central(all, ac, av);
 		in = open(all->file1, O_RDONLY);
+		if (open_error(in, all) == 1)
+			return (0);
 		first_cmd(all, in);
 		while (all->pipe_nmb > 0)
 		{
