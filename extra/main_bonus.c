@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:22:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/28 15:32:50 by tibarbos         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:50:22 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	open_error(int in, t_all *all)
 	if (in == -1)
 	{
 		free_all (all);
+		ft_printf("Incorrect input file.\n");
 		return (1);
 	}
 	return (0);
