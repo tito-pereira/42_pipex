@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:59:32 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/27 16:39:42 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:18:22 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ char	*read_pipe(int fd)
 	{
 		err = read(fd, total, 100);
 		if (err == 0)
-			break ;
+		{
+			free (total);
+			return (NULL);
+		}
 	}
 	total[err - 1] = '\0';
 	return (total);
@@ -62,3 +65,11 @@ char	*proc_which(char *arr_zero)
 	free (arr_zero);
 	return (total);
 }
+
+/*
+ao colocar o retorno da read pipe como NULL
+total = NULL
+return (total) = return (NULL)
+
+acho que ja cobre o error management
+*/
