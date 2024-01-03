@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:34:00 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/28 15:51:25 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:36:32 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int ac, char **av)
 	if (ac == 5)
 	{
 		all = proc_all(av);
+		//if (all == NULL)
+			//return (0);
 		in = open(all->file1, O_RDONLY);
 		if (open_error(in, all) == 1)
 			return (0);
