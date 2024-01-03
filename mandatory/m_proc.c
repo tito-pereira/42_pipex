@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/01/03 17:23:54 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:48:44 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ char	**new_arr(char **arr)
 	return (new);
 }
 
-int	proc_loop(t_cmd *new, char **av, int index, int i)
+int	proc_loop(t_cmd *new, char **av, int index, t_all *all)
 {
+	int	i;
+	
+	i = all->pipe_nmb;
 	while (i >= 0)
 	{
 		index++;
@@ -55,7 +58,7 @@ t_cmd	*proc_cmds(t_all *all, char **av, int index)
 {
 	t_cmd	*new;
 	t_cmd	*begin;
-	int		i;
+	int		proc;
 
 	new = malloc(sizeof(t_cmd));
 	new->next = NULL;
@@ -64,14 +67,14 @@ t_cmd	*proc_cmds(t_all *all, char **av, int index)
 	new->arr[0] = proc_which(new->arr[0]);
 	if (new->arr[0] == NULL)
 	{
-		free_cmds (new);
+		free_cmds (new, 0);
 		return (NULL);
 	}
 	begin = new;
-	i = all->pipe_nmb;
-	if (proc_loop(new, av, index, i) == 0)
+	proc = proc_loop(new, av, index, all);
+	if (proc == 0)
 	{
-		free_cmds (begin);
+		free_cmds (begin, 0);
 		return (NULL);
 	}
 	return (begin);

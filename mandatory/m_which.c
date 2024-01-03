@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:59:32 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/01/03 17:18:22 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:49:07 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@ char	*read_pipe(int fd)
 	char	*total;
 	int		err;
 
-	err = 100;
-	total = malloc(100 * sizeof(char));
-	while (err == 100)
+	total = malloc(200 * sizeof(char));
+	err = read(fd, total, 150);
+	if (err <= 0)
 	{
-		err = read(fd, total, 100);
-		if (err == 0)
-		{
-			free (total);
-			return (NULL);
-		}
+		free (total);
+		return (NULL);
 	}
-	total[err - 1] = '\0';
+	total[err] = '\0';
 	return (total);
 }
 
@@ -62,14 +58,6 @@ char	*proc_which(char *arr_zero)
 	total = read_pipe(fd[0]);
 	close(fd[0]);
 	free(fd);
-	free (arr_zero);
+	free(arr_zero);
 	return (total);
 }
-
-/*
-ao colocar o retorno da read pipe como NULL
-total = NULL
-return (total) = return (NULL)
-
-acho que ja cobre o error management
-*/
