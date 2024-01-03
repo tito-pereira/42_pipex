@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/01/03 17:19:01 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:23:54 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,50 +97,3 @@ t_all	*proc_all(char **av)
 	all->begin = all->cmds;
 	return (all);
 }
-
-/*
-se o proc_which der erro / nao existir comando
-
-. primeiro por a divisao do proc cmds a funcionar
-- aparentemente ja ta a dar
-
-. segundo, funcao auxiliar de quando ha erro de comando
-	de far os frees necessarios e retornar NULL
-dois mains, proc all
-erros no proc_which previstos, agr falta testar,
-pra ja compila tudo bem
-
-. terceiro, tratar da proc_which, dar free quando erro,
-	usar os perror no execve, evitar q entre na read c erro, etc
-
-if (new->arr[0] == NULL) //resultado do proc_which retornar NULL
-
-==141852== Invalid write of size 1
-==141852==    at 0x4017BF: read_pipe (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x4018D1: proc_which (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x4015F5: proc_cmds (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x401DEA: proc_central (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x401987: main (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==  Address 0x4a5729f is 1 bytes before a block of size 100 alloc'd
-==141852==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==141852==    by 0x40177B: read_pipe (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x4018D1: proc_which (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x4015F5: proc_cmds (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x401DEA: proc_central (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852==    by 0x401987: main (in /nfs/homes/tibarbos/42_Cursus/pipex/pipex)
-==141852== 
-
-sera que ja esta tudo?? parece??
-*/
-
-/*while (i >= 0)
-	{
-		index++;
-		new->next = malloc(sizeof(t_cmd));
-		new = new->next;
-		new->arr = ft_split(av[index], ' ');
-		new->arr = new_arr(new->arr);
-		new->arr[0] = proc_which(new->arr[0]);
-		new->next = NULL;
-		i--;
-	}*/
