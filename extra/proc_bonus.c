@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:21:47 by tibarbos          #+#    #+#             */
-/*   Updated: 2023/12/28 15:23:38 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:52:08 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_all	*proc_central(t_all *all, int ac, char **av)
 		all->cmds = proc_cmds(all, av, 3);
 	else
 		all->cmds = proc_cmds(all, av, 2);
+	null_check(all);
 	all->begin = all->cmds;
 	return (all);
 }

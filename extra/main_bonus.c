@@ -6,11 +6,20 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:22:03 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/01/03 17:20:25 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:51:43 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+void	null_check(t_all *all)
+{
+	if (all->cmds == NULL)
+	{
+		free_all (all);
+		exit (0);
+	}
+}
 
 int	open_error(int in, t_all *all)
 {
