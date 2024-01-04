@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:19:40 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/01/03 19:48:44 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:10:47 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**new_arr(char **arr)
 int	proc_loop(t_cmd *new, char **av, int index, t_all *all)
 {
 	int	i;
-	
+
 	i = all->pipe_nmb;
 	while (i >= 0)
 	{

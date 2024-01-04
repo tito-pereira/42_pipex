@@ -6,7 +6,7 @@
 /*   By: tibarbos <tibarbos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 17:59:32 by tibarbos          #+#    #+#             */
-/*   Updated: 2024/01/03 19:49:07 by tibarbos         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:04:09 by tibarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*read_pipe(int fd)
 		free (total);
 		return (NULL);
 	}
-	total[err] = '\0';
+	total[err - 1] = '\0';
 	return (total);
 }
 
